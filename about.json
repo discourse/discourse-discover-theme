@@ -1,13 +1,15 @@
 {
-  "name": "TODO",
-  "component": true,
+  "name": "discourse-discover-theme",
   "authors": "Discourse",
-  "about_url": "TODO: Put your theme's public repo or Meta topic URL here",
-  "license_url": "TODO: Put your theme's LICENSE URL here",
-  "learn_more": "TODO",
+  "about_url": "https://github.com/discourse/discourse-discover-theme",
   "theme_version": "0.0.1",
-  "minimum_discourse_version": null,
-  "maximum_discourse_version": null,
-  "assets": {},
-  "modifiers": {}
+  "assets": {
+  },
+  "modifiers": {
+    "custom_homepage": "true",
+    "topic_thumbnail_sizes": [
+      [400, 400],
+      [800, 800]
+    ]
+  }
 }

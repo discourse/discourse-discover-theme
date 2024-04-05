@@ -1,4 +1,4 @@
-# **Theme Name**
+# discover-theme
 
 **Theme Summary**
 
