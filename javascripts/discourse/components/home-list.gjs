@@ -27,11 +27,15 @@ export default class HomeList extends Component {
       {{#each this.topics as |topic|}}
         <div class="home-list-item">
           <h2>
-            <a href={{topic.featured_link}} target="_blank">
+            <a
+              href={{topic.featured_link}}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {{topic.title}}
             </a>
           </h2>
-          {{log topic}}
+          {{! log topic }}
         </div>
       {{/each}}
     </div>
