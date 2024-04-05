@@ -1,4 +1,4 @@
-# discover-theme
+# Discourse Discover Theme
 
 **Theme Summary**
 
