@@ -40,11 +40,7 @@ export default class HomeList extends Component {
               rel="noopener noreferrer"
               class="home-list-item__image"
             >
-              <img
-                src={{topic.thumb800.url}}
-                alt={{topic.title}}
-                style="max-width: 400px; height: auto;"
-              />
+              <img src={{topic.thumb800.url}} alt={{topic.title}} />
             </a>
           {{else}}
             <div class="home-list-item__no-image"></div>
@@ -54,8 +50,7 @@ export default class HomeList extends Component {
               href={{topic.featured_link}}
               target="_blank"
               rel="noopener noreferrer"
-            >
-              {{topic.title}}
+            >{{topic.title}}
             </a>
           </h2>
           <div class="home-list-item__metadata">
