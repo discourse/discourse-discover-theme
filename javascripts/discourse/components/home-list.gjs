@@ -21,7 +21,9 @@ export default class HomeList extends Component {
       results = results.filter((t) => t.featured_link !== null);
 
       results.forEach((topic) => {
-        topic.thumb800 = topic.thumbnails?.filter((th) => th.max_width === 800)[0];
+        topic.thumb800 = topic.thumbnails?.filter(
+          (th) => th.max_width === 800
+        )[0];
       });
       this.topics = results.slice(0, count);
     });
@@ -38,11 +40,11 @@ export default class HomeList extends Component {
               rel="noopener noreferrer"
               class="home-list-item__image"
             >
-            <img
-              src={{topic.thumb800.url}}
-              alt={{topic.title}}
-              style="max-width: 400px; height: auto;"
-            />
+              <img
+                src={{topic.thumb800.url}}
+                alt={{topic.title}}
+                style="max-width: 400px; height: auto;"
+              />
             </a>
           {{else}}
             <div class="home-list-item__no-image"></div>
