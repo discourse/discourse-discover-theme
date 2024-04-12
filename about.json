@@ -4,9 +4,11 @@
   "about_url": "https://github.com/discourse/discourse-discover-theme",
   "theme_version": "0.0.1",
   "assets": {
+    "blobswide": "assets/blobs-wide.svg"
   },
   "modifiers": {
     "custom_homepage": "true",
+    "serialize_topic_excerpts": "true",
     "topic_thumbnail_sizes": [
       [400, 400],
       [800, 800]

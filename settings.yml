@@ -1,0 +1,26 @@
+homepage_filters:
+  type: list
+  list_type: tag
+  default: ""
+
+homepage_filter:
+  type: objects
+  default:
+    - tag: ["news"]
+      icon: "far-newspaper"
+      button_text: "News"
+  schema:
+    name: "filter"
+    properties:
+      tag:
+        type: tags
+        required: true
+        validations:
+          min_length: 1
+      icon:
+        type: string
+      button_text:
+        type: string
+
+svg_icons:
+  default: "far-newspaper"
