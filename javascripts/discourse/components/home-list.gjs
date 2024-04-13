@@ -1,74 +1,90 @@
 import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
+import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { service } from "@ember/service";
-import { ajax } from "discourse/lib/ajax";
+import ConditionalLoadingSpinner from "discourse/components/conditional-loading-spinner";
+import bodyClass from "discourse/helpers/body-class";
 import dIcon from "discourse-common/helpers/d-icon";
-// import i18n from "discourse-common/helpers/i18n";
+import i18n from "discourse-common/helpers/i18n";
 
 export default class HomeList extends Component {
   @service store;
   @service siteSettings;
-  @tracked topics;
+  @service homepageFilter;
 
-  constructor() {
-    super(...arguments);
-
-    const count = 50; // TODO: turn this into a loadmore component
-    const route = `c/${this.siteSettings.discourse_discover_category}.json?status=listed`;
-
-    ajax(route).then((data) => {
-      let results = data.topic_list.topics;
-      results = results.filter((t) => t.featured_link !== null);
-
-      results.forEach((topic) => {
-        topic.thumb800 = topic.thumbnails?.filter(
-          (th) => th.max_width === 800
-        )[0];
-      });
-      this.topics = results.slice(0, count);
-    });
-  }
+  parseJSON = (str) => {
+    try {
+      return JSON.parse(str);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error("Error parsing JSON:", error);
+      return {};
+    }
+  };
 
   <template>
-    <div class="home-list">
-      {{#each this.topics as |topic|}}
-        <div class="home-list-item">
-          {{#if topic.thumb800}}
+    {{! template-lint-disable no-invalid-interactive }}
+    {{bodyClass "discover-home"}}
+
+    <ul
+      class="discover-list"
+      {{didInsert this.homepageFilter.getSiteList}}
+      {{didUpdate
+        this.homepageFilter.getSiteList
+        this.homepageFilter.tagFilter
+      }}
+    >
+      {{#if this.homepageFilter.topicResults}}
+        {{#each this.homepageFilter.topicResults as |topic|}}
+          <li class="discover-list__item">
             <a
               href={{topic.featured_link}}
               target="_blank"
               rel="noopener noreferrer"
-              class="home-list-item__image"
+              class="discover-list__item-link"
             >
-              <img src={{topic.thumb800.url}} alt={{topic.title}} />
+              <img class="discover-list__item-banner" src={{topic.image_url}} />
+              <div class="discover-list__item-content">
+                <h2>
+                  <img
+                    class="discover-list__item-logo"
+                    src={{topic.image_url}}
+                  />
+                  {{topic.title}}
+                </h2>
+                <div class="discover-list__item-meta">
+                  {{#if topic.topics_30_days}}
+                    <span>{{dIcon "comments"}}{{topic.topics_30_days}}</span>
+                  {{/if}}
+                  {{#if topic.users_30_days}}
+                    <span>{{dIcon "user"}}
+                      {{topic.users_30_days}}</span>
+                  {{/if}}
+                </div>
+                <p class="discover-list__item-excerpt">
+                  lorem ipsum dolor sit amit consequtor adspicio elit lorem
+                  ipsum dolor sit amit consequtor adspicio elit lorem ipsum
+                  dolor sit amit consequtor adspicio elit lorem ipsum dolor sit
+                  amit consequtor adspicio elit
+                  {{topic.excerpt}}
+                </p>
+              </div>
             </a>
-          {{else}}
-            <div class="home-list-item__no-image"></div>
-          {{/if}}
-          <h2>
-            <a
-              href={{topic.featured_link}}
-              target="_blank"
-              rel="noopener noreferrer"
-            >{{topic.title}}
-            </a>
-          </h2>
-          <div class="home-list-item__metadata">
-            {{#if topic.users_30_days}}
-              <span class="home-list-item__users">
-                {{dIcon "user"}}
-                {{topic.users_30_days}}+ users
-              </span>
-            {{/if}}
-            {{#if topic.topics_30_days}}
-              <span class="home-list-item__topics">
-                {{dIcon "cog"}}
-                {{topic.topics_30_days}}+ topics
-              </span>
-            {{/if}}
-          </div>
-        </div>
-      {{/each}}
-    </div>
+          </li>
+        {{/each}}
+      {{else}}
+        <ConditionalLoadingSpinner @condition={{this.homepageFilter.loading}}>
+          <li class="no-results">
+            {{i18n (themePrefix "search.no_results")}}
+            {{#if this.homepageFilter.searchQuery}}
+              —
+              <a {{on "click" this.homepageFilter.resetFilter}}>
+                {{i18n (themePrefix "search.remove_filter")}}
+              </a>{{/if}}
+          </li>
+        </ConditionalLoadingSpinner>
+      {{/if}}
+    </ul>
   </template>
 }

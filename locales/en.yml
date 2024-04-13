@@ -1,3 +1,9 @@
 en:
+  search:
+    placeholder: "Filter for fabulous forums..."
+    no_results: "No forums found"
+    remove_filter: "Remove filter?"
+  navigation:
+    all: "All"
   theme_metadata:
     description: A theme for Discourse Discover.
