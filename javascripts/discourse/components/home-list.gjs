@@ -53,10 +53,12 @@ export default class HomeList extends Component {
                   {{topic.title}}
                 </h2>
                 <div class="discover-list__item-meta">
-                  <span>{{dIcon "comments"}}500</span>
-                  {{#if topic.discover_entry.extra.active_users_30_days}}
+                  {{#if topic.topics_30_days}}
+                    <span>{{dIcon "comments"}}{{topic.topics_30_days}}</span>
+                  {{/if}}
+                  {{#if topic.users_30_days}}
                     <span>{{dIcon "user"}}
-                      {{topic.discover_entry.extra.active_users_30_days}}</span>
+                      {{topic.users_30_days}}</span>
                   {{/if}}
                 </div>
                 <p class="discover-list__item-excerpt">
