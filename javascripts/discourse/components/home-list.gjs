@@ -24,6 +24,7 @@ export default class HomeList extends Component {
   };
 
   <template>
+    {{! template-lint-disable no-invalid-interactive }}
     {{bodyClass "discover-home"}}
 
     <ul

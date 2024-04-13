@@ -37,6 +37,7 @@ export default class NavigationList extends Component {
   }
 
   <template>
+    {{! template-lint-disable no-invalid-interactive }}
     <ul class="discover-navigation-list">
       {{#each this.navItems as |item|}}
         <li
