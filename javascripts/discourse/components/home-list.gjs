@@ -44,7 +44,12 @@ export default class HomeList extends Component {
               rel="noopener noreferrer"
               class="discover-list__item-link"
             >
-              <img class="discover-list__item-banner" src={{topic.image_url}} />
+              <img
+                class="discover-list__item-banner"
+                srcset={{topic.bannerImage.srcset}}
+                src={{topic.bannerImage.src}}
+                sizes={{topic.bannerImage.sizes}}
+              />
               <div class="discover-list__item-content">
                 <h2>
                   <img
@@ -83,6 +88,7 @@ export default class HomeList extends Component {
                 {{i18n (themePrefix "search.remove_filter")}}
               </a>{{/if}}
           </li>
+          {{bodyClass "--no-results"}}
         </ConditionalLoadingSpinner>
       {{/if}}
     </ul>

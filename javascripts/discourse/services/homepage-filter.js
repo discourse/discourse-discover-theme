@@ -21,20 +21,36 @@ export default class HomepageFilter extends Service {
     }
   }
 
+  createSrcset(thumbnails) {
+    return thumbnails
+      .map((thumbnail) => `${thumbnail.url} ${thumbnail.width}w`)
+      .join(", ");
+  }
+
+  createBannerImage(thumbnails) {
+    const srcset = this.createSrcset(thumbnails);
+    const sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"; // This can be adjusted or dynamically generated if necessary
+    const src = thumbnails[0].url; // Fallback to the first thumbnail's URL
+
+    return { srcset, sizes, src };
+  }
+
   get filter() {
-    if (this.searchQuery) {
-      const category = Category.findById(
-        parseInt(this.siteSettings.discourse_discover_category, 10)
-      );
+    const category = Category.findById(
+      parseInt(this.siteSettings.discourse_discover_category, 10)
+    );
 
-      const tagFilter = this.tagFilter ? ` tags%3A${this.tagFilter}` : "";
+    let searchString = `#${category.slug}`;
 
-      return `/search.json?q=${this.searchQuery} %23${category.slug}${tagFilter}`;
-    } else {
-      return this.tagFilter
-        ? `/tags/c/${this.siteSettings.discourse_discover_category}/${this.tagFilter}.json`
-        : `c/${this.siteSettings.discourse_discover_category}.json`;
+    if (this.tagFilter) {
+      searchString += ` tags:${this.tagFilter}`;
     }
+
+    if (this.searchQuery) {
+      searchString += ` ${this.searchQuery}`;
+    }
+
+    return `/search.json?q=${encodeURIComponent(searchString)}`;
   }
 
   @action
@@ -50,40 +66,37 @@ export default class HomepageFilter extends Service {
     this.loading = true;
     ajax(this.filter)
       .then((data) => {
-        if (this.searchQuery) {
-          if (data.topics?.length) {
-            this.topicResults = data.topics?.slice(0, count);
-          } else {
-            this.topicResults = [];
-          }
-        } else {
-          let results = data.topic_list.topics.filter(
-            (t) => t.featured_link !== null
-          );
-
-          // parse "extra"
-          results = results
-            .map((topic) => ({
-              ...topic,
-              discover_entry: topic.discover_entry
-                ? {
-                    ...topic.discover_entry,
-                    extra: topic.discover_entry.extra
-                      ? this.parseJSON(topic.discover_entry.extra)
-                      : {},
-                  }
-                : {},
-            }))
-            .slice(0, count);
-
-          this.topicResults = results;
+        if (!data.topics) {
+          return (this.topicResults = []);
         }
+        let results = data.topics.filter((t) => t.featured_link !== null);
 
-        this.loading = false;
+        // parse "extra"
+        results = results
+          .map((topic) => ({
+            ...topic,
+            discover_entry: topic.discover_entry
+              ? {
+                  ...topic.discover_entry,
+                  extra: topic.discover_entry.extra
+                    ? this.parseJSON(topic.discover_entry.extra)
+                    : {},
+                }
+              : {},
+            bannerImage: topic.thumbnails
+              ? this.createBannerImage(topic.thumbnails)
+              : { srcset: "", sizes: "", src: "" },
+          }))
+          .slice(0, count);
+
+        this.topicResults = results;
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
         console.error("Error fetching sites:", error);
+      })
+      .finally(() => {
+        this.loading = false;
       });
   }
 }
