@@ -4,8 +4,6 @@ import Service, { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import Category from "discourse/models/category";
 
-const count = 50; // TODO: turn this into a loadmore component
-
 export default class HomepageFilter extends Service {
   @service siteSettings;
 
@@ -13,12 +11,29 @@ export default class HomepageFilter extends Service {
   @tracked topicResults = [];
   @tracked searchQuery = "";
   @tracked inputText = "";
-  @tracked loading = true;
+  @tracked loading = false;
+  @tracked hasMoreResults = false;
+  @tracked currentPage = 1;
 
   updateFilter(filter) {
     if (this.tagFilter !== filter) {
       this.tagFilter = filter;
+      this.resetPageAndFetch();
     }
+  }
+
+  updateSearchQuery(query) {
+    if (this.searchQuery !== query) {
+      this.searchQuery = query;
+      this.resetPageAndFetch();
+    }
+  }
+
+  resetPageAndFetch() {
+    this.currentPage = 1;
+    this.topicResults = [];
+    this.hasMoreResults = false;
+    this.getSiteList();
   }
 
   createSrcset(thumbnails) {
@@ -29,67 +44,73 @@ export default class HomepageFilter extends Service {
 
   createBannerImage(thumbnails) {
     const srcset = this.createSrcset(thumbnails);
-    const sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"; // This can be adjusted or dynamically generated if necessary
-    const src = thumbnails[0].url; // Fallback to the first thumbnail's URL
+    const sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw";
+    const src = thumbnails[0].url;
 
     return { srcset, sizes, src };
   }
 
-  get filter() {
+  parseResults(results) {
+    return results.topics.map((topic) => ({
+      ...topic,
+      discover_entry: topic.discover_entry
+        ? {
+            ...topic.discover_entry,
+            extra: topic.discover_entry.extra
+              ? JSON.parse(topic.discover_entry.extra)
+              : {},
+          }
+        : {},
+      bannerImage: topic.thumbnails
+        ? this.createBannerImage(topic.thumbnails)
+        : null,
+    }));
+  }
+
+  get currentFilter() {
     const category = Category.findById(
       parseInt(this.siteSettings.discourse_discover_category, 10)
     );
 
     let searchString = `#${category.slug}`;
-
     if (this.tagFilter) {
       searchString += ` tags:${this.tagFilter}`;
     }
-
     if (this.searchQuery) {
       searchString += ` ${this.searchQuery}`;
     }
 
-    return `/search.json?q=${encodeURIComponent(searchString)}`;
+    return `/search.json?q=${encodeURIComponent(searchString)}&page=${
+      this.currentPage
+    }`;
   }
 
   @action
-  resetFilter() {
+  resetSearch() {
     this.searchQuery = "";
     this.inputText = "";
-    this.loading = true;
-    this.getSiteList();
+    this.resetPageAndFetch();
   }
 
   @action
   getSiteList() {
     this.loading = true;
-    ajax(this.filter)
+
+    ajax(this.currentFilter)
       .then((data) => {
+        this.hasMoreResults = data.grouped_search_result.more_full_page_results;
         if (!data.topics) {
-          return (this.topicResults = []);
+          this.topicResults = [];
+          return;
         }
-        let results = data.topics.filter((t) => t.featured_link !== null);
 
-        // parse "extra"
-        results = results
-          .map((topic) => ({
-            ...topic,
-            discover_entry: topic.discover_entry
-              ? {
-                  ...topic.discover_entry,
-                  extra: topic.discover_entry.extra
-                    ? this.parseJSON(topic.discover_entry.extra)
-                    : {},
-                }
-              : {},
-            bannerImage: topic.thumbnails
-              ? this.createBannerImage(topic.thumbnails)
-              : { srcset: "", sizes: "", src: "" },
-          }))
-          .slice(0, count);
-
-        this.topicResults = results;
+        this.topicResults =
+          this.currentPage > 1
+            ? [...this.topicResults, ...this.parseResults(data)]
+            : this.parseResults(data);
+        if (this.hasMoreResults) {
+          this.currentPage++;
+        }
       })
       .catch((error) => {
         // eslint-disable-next-line no-console

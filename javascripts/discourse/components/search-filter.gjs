@@ -24,8 +24,7 @@ export default class NavigationList extends Component {
   }
 
   applySearch(value) {
-    this.homepageFilter.searchQuery = value;
-    this.homepageFilter.getSiteList();
+    this.homepageFilter.updateSearchQuery(value);
   }
 
   <template>
