@@ -4,7 +4,8 @@
   "about_url": "https://github.com/discourse/discourse-discover-theme",
   "theme_version": "0.0.1",
   "assets": {
-    "blobswide": "assets/blobs-wide.svg"
+    "rubik": "assets/Rubik-VariableFont_wght.ttf",
+    "open-sans": "assets/OpenSans-VariableFont_wdth,wght.ttf"
   },
   "modifiers": {
     "custom_homepage": "true",
