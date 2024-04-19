@@ -3,6 +3,7 @@ import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { service } from "@ember/service";
+import { htmlSafe } from "@ember/template";
 import ConditionalLoadingSpinner from "discourse/components/conditional-loading-spinner";
 import LoadMore from "discourse/components/load-more";
 import bodyClass from "discourse/helpers/body-class";
@@ -45,33 +46,38 @@ export default class HomeList extends Component {
               rel="noopener noreferrer"
               class="discover-list__item-link"
             >
-              <img
-                class="discover-list__item-banner"
-                srcset={{topic.bannerImage.srcset}}
-                src={{topic.bannerImage.src}}
-                sizes={{topic.bannerImage.sizes}}
-              />
-              <div class="discover-list__item-content">
-                <h2>
+              <div class="discover-list__item-banner">
+                <img
+                  srcset={{topic.bannerImage.srcset}}
+                  src={{topic.bannerImage.src}}
+                  sizes={{topic.bannerImage.sizes}}
+                />
+                {{#unless topic.bannerImage.src}}
+                  <div class="no-image">{{dIcon "fab-discourse"}}</div>
+                {{/unless}}
+              </div>
+              <h2>
+                {{#if topic.image_url}}
+                  {{! todo — replace image with logo}}
                   <img
                     class="discover-list__item-logo"
                     src={{topic.image_url}}
                   />
-                  {{topic.title}}
-                </h2>
-                <div class="discover-list__item-meta">
-                  {{#if topic.topics_30_days}}
-                    <span>{{dIcon "comments"}}{{topic.topics_30_days}}</span>
-                  {{/if}}
-                  {{#if topic.users_30_days}}
-                    <span>{{dIcon "user"}}
-                      {{topic.users_30_days}}</span>
-                  {{/if}}
-                </div>
-                <p class="discover-list__item-excerpt">
-                  {{topic.excerpt}}
-                </p>
+                {{/if}}
+                <span>{{topic.title}}</span>
+              </h2>
+              <div class="discover-list__item-meta">
+                {{#if topic.users_30_days}}
+                  <span>{{dIcon "user-friends"}}
+                    {{topic.users_30_days}}</span>
+                {{/if}}
+                {{#if topic.topics_30_days}}
+                  <span>{{dIcon "comments"}}{{topic.topics_30_days}}</span>
+                {{/if}}
               </div>
+              <p class="discover-list__item-excerpt">
+                {{htmlSafe topic.excerpt}}
+              </p>
             </a>
           </li>
         {{/each}}
