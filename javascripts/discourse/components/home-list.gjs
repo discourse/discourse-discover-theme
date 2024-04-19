@@ -39,7 +39,6 @@ export default class HomeList extends Component {
     <ul class="discover-list" {{didInsert this.homepageFilter.getSiteList}}>
       {{#if this.homepageFilter.topicResults}}
         {{#each this.homepageFilter.topicResults as |topic|}}
-          {{log topic}}
           <li class="discover-list__item">
             <a
               href={{topic.featured_link}}
