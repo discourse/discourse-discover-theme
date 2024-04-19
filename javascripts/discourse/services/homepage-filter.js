@@ -44,8 +44,8 @@ export default class HomepageFilter extends Service {
 
   createBannerImage(thumbnails) {
     const srcset = this.createSrcset(thumbnails);
-    const sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw";
-    const src = thumbnails[0].url;
+    const sizes = "(max-width: 500px) 400px, (max-width: 600px) 800px, 1024px";
+    const src = thumbnails[0].url; // default
 
     return { srcset, sizes, src };
   }

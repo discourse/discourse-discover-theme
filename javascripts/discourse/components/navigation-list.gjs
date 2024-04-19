@@ -38,19 +38,33 @@ export default class NavigationList extends Component {
 
   <template>
     {{! template-lint-disable no-invalid-interactive }}
-    <ul class="discover-navigation-list">
-      {{#each this.navItems as |item|}}
-        <li
-          data-tag-name={{item.tagName}}
-          {{on "click" (fn this.updateFilter item.tagName)}}
-          class="discover-navigation-list__item {{if item.isActive '--active'}}"
-        >
-          {{#if item.icon}}
-            {{dIcon item.icon}}
-          {{/if}}
-          {{item.label}}
-        </li>
-      {{/each}}
-    </ul>
+    <div class="discover-navigation-list-wrapper">
+      <ul class="discover-navigation-list">
+        {{#each this.navItems as |item|}}
+          <li
+            data-tag-name={{item.tagName}}
+            {{on "click" (fn this.updateFilter item.tagName)}}
+            class="discover-navigation-list__item
+              {{if item.isActive '--active'}}"
+          >
+            {{#if item.icon}}
+              {{dIcon item.icon}}
+            {{/if}}
+            {{item.label}}
+          </li>
+        {{/each}}
+      </ul>
+
+      <div class="add-your-site">
+        <h3>
+          {{i18n (themePrefix "footer.add_message")}}
+          <a
+            href="https://meta.discourse.org/t/introducing-discourse-discover/295223"
+          >
+            {{i18n (themePrefix "footer.add_link")}}
+          </a>
+        </h3>
+      </div>
+    </div>
   </template>
 }
