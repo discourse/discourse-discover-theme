@@ -370,6 +370,14 @@
           align-items: center;
           gap: 0.5em;
         }
+
+        a.admin-link {
+          margin-left: auto;
+        }
+
+        .d-icon-cog {
+          opacity: 0.5;
+        }
       }
     }
 
