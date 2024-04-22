@@ -77,18 +77,19 @@ export default class HomeList extends Component {
                       "comments"
                     }}{{topic.topics_30_days}}</span>
                 {{/if}}
-                {{#if this.currentUser.admin}}
-                  <a
-                    class="admin-link"
-                    href="/t/{{topic.id}}"
-                    target="_blank"
-                  >{{dIcon "cog"}}</a>
-                {{/if}}
               </div>
               <p class="discover-list__item-excerpt">
                 {{htmlSafe topic.excerpt}}
               </p>
             </a>
+            {{#if this.currentUser.admin}}
+              <a
+                class="admin-link"
+                href="/t/{{topic.id}}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >{{dIcon "cog"}}</a>
+            {{/if}}
           </li>
         {{/each}}
         <LoadMore @selector=".discover-list__item" @action={{this.loadMore}} />
