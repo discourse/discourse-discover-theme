@@ -51,16 +51,10 @@ export default class HomepageFilter extends Service {
   }
 
   parseResults(results) {
+    results.topics.sort((a, b) => b.topics_30_days - a.topics_30_days);
+
     return results.topics.map((topic) => ({
       ...topic,
-      discover_entry: topic.discover_entry
-        ? {
-            ...topic.discover_entry,
-            extra: topic.discover_entry.extra
-              ? JSON.parse(topic.discover_entry.extra)
-              : {},
-          }
-        : {},
       bannerImage: topic.thumbnails
         ? this.createBannerImage(topic.thumbnails)
         : null,

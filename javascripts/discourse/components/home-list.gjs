@@ -87,7 +87,7 @@ export default class HomeList extends Component {
                         {{this.roundStat topic.users_30_days}}
                       </:trigger>
                       <:content>
-                        logged in visitors over the past 30 days
+                        {{i18n (themePrefix "tooltip.users")}}
                       </:content>
                     </DTooltip>
                   </span>
@@ -100,7 +100,7 @@ export default class HomeList extends Component {
                         {{this.roundStat topic.topics_30_days}}
                       </:trigger>
                       <:content>
-                        posts over the past 30 days
+                        {{i18n (themePrefix "tooltip.posts")}}
                       </:content>
                     </DTooltip>
                   </span>
