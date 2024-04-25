@@ -9,6 +9,7 @@ import LoadMore from "discourse/components/load-more";
 import bodyClass from "discourse/helpers/body-class";
 import dIcon from "discourse-common/helpers/d-icon";
 import i18n from "discourse-common/helpers/i18n";
+import DTooltip from "float-kit/components/d-tooltip";
 
 export default class HomeList extends Component {
   @service store;
@@ -25,6 +26,16 @@ export default class HomeList extends Component {
       return {};
     }
   };
+
+  roundStat(num) {
+    if (num < 10) {
+      return num;
+    } else if (num < 1000) {
+      return Math.ceil(num / 10) * 10;
+    } else {
+      return Math.ceil(num / 100) * 100;
+    }
+  }
 
   @action
   loadMore() {
@@ -69,13 +80,30 @@ export default class HomeList extends Component {
               </h2>
               <div class="discover-list__item-meta">
                 {{#if topic.users_30_days}}
-                  <span title="recently active users">{{dIcon "user-friends"}}
-                    {{topic.users_30_days}}</span>
+                  <span>
+                    <DTooltip @identifier="active-topics">
+                      <:trigger>
+                        {{dIcon "user-friends"}}
+                        {{this.roundStat topic.users_30_days}}
+                      </:trigger>
+                      <:content>
+                        {{i18n (themePrefix "tooltip.users")}}
+                      </:content>
+                    </DTooltip>
+                  </span>
                 {{/if}}
                 {{#if topic.topics_30_days}}
-                  <span title="recently active topics">{{dIcon
-                      "comments"
-                    }}{{topic.topics_30_days}}</span>
+                  <span>
+                    <DTooltip @identifier="active-topics">
+                      <:trigger>
+                        {{dIcon "comments"}}
+                        {{this.roundStat topic.topics_30_days}}
+                      </:trigger>
+                      <:content>
+                        {{i18n (themePrefix "tooltip.posts")}}
+                      </:content>
+                    </DTooltip>
+                  </span>
                 {{/if}}
               </div>
               <p class="discover-list__item-excerpt">
