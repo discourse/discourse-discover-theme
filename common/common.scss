@@ -47,6 +47,8 @@
     grid-area: search;
     padding: 4em 0 5em;
     margin-bottom: 2em;
+    position: relative;
+    z-index: 1;
     @media screen and (max-width: 1100px) {
       padding-bottom: 0;
     }
@@ -78,6 +80,8 @@
   }
 
   .discover-homepage__directory {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-areas: "filters directory";
     grid-template-rows: auto 1fr;
@@ -138,6 +142,7 @@
       cursor: pointer;
 
       .d-icon {
+        display: none; // decided against icons for now
         font-size: var(--font-down-2);
         color: var(--primary-high);
       }
@@ -376,14 +381,26 @@
       a.admin-link {
         position: absolute;
         z-index: 2;
-        right: 15px;
-        top: 15px;
-        font-size: var(--font-up-2);
+        right: 0.5em;
+        top: 0.5em;
+        font-size: var(--font-up-1);
         opacity: 0;
+        background: var(--secondary);
+        padding: 0.25em 0.5em;
+        border-radius: 0.5em;
+        transition: opacity 0.15s ease-in-out;
       }
 
-      &:hover a.admin-link {
-        opacity: 0.75;
+      .desktop-view & {
+        &:hover a.admin-link {
+          opacity: 0.75;
+        }
+      }
+
+      .mobile-view & {
+        a.admin-link {
+          opacity: 0.75;
+        }
       }
     }
 
@@ -406,6 +423,8 @@
 
 .blob-container {
   display: block !important; // hidden inline to avoid giant unstyled SVG flash
+  position: relative;
+  z-index: 0;
 }
 
 .blobby {
