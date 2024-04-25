@@ -14,6 +14,7 @@ export default class HomeList extends Component {
   @service store;
   @service siteSettings;
   @service homepageFilter;
+  @service currentUser;
 
   parseJSON = (str) => {
     try {
@@ -68,17 +69,27 @@ export default class HomeList extends Component {
               </h2>
               <div class="discover-list__item-meta">
                 {{#if topic.users_30_days}}
-                  <span>{{dIcon "user-friends"}}
+                  <span title="recently active users">{{dIcon "user-friends"}}
                     {{topic.users_30_days}}</span>
                 {{/if}}
                 {{#if topic.topics_30_days}}
-                  <span>{{dIcon "comments"}}{{topic.topics_30_days}}</span>
+                  <span title="recently active topics">{{dIcon
+                      "comments"
+                    }}{{topic.topics_30_days}}</span>
                 {{/if}}
               </div>
               <p class="discover-list__item-excerpt">
                 {{htmlSafe topic.excerpt}}
               </p>
             </a>
+            {{#if this.currentUser.admin}}
+              <a
+                class="admin-link"
+                href="/t/{{topic.id}}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >{{dIcon "cog"}}</a>
+            {{/if}}
           </li>
         {{/each}}
         <LoadMore @selector=".discover-list__item" @action={{this.loadMore}} />

@@ -204,6 +204,7 @@
       grid-template-rows: subgrid; // inherit parent rows
       grid-row: span 4;
       gap: 0;
+      position: relative;
 
       &:nth-child(5n + 1) {
         --no-image-background-color: #e84a5120;
@@ -370,6 +371,19 @@
           align-items: center;
           gap: 0.5em;
         }
+      }
+
+      a.admin-link {
+        position: absolute;
+        z-index: 2;
+        right: 15px;
+        top: 15px;
+        font-size: var(--font-up-2);
+        opacity: 0;
+      }
+
+      &:hover a.admin-link {
+        opacity: 0.75;
       }
     }
 
