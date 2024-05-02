@@ -44,6 +44,41 @@ export default class HomeList extends Component {
     }
   }
 
+  @action
+  checkImageBackgroundColor(event) {
+    const imageElement = event.target;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = imageElement.naturalWidth;
+    canvas.height = imageElement.naturalHeight;
+    const context = canvas.getContext("2d");
+
+    try {
+      context.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
+      const data = context.getImageData(0, 0, canvas.width, canvas.height).data;
+
+      let weightedSum = 0;
+      let alphaSum = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        let alpha = data[i + 3];
+        let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+        weightedSum += avg * (alpha / 255);
+        alphaSum += alpha / 255;
+      }
+
+      // if no alpha, adding a background color has no effect
+      const averageColorValue = alphaSum > 0 ? weightedSum / alphaSum : 0;
+
+      if (averageColorValue >= 240) {
+        // if the image is mostly white, it probably needs a dark background
+        imageElement.style.backgroundColor = "#333";
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error("Error checking logo background:", error);
+    }
+  }
+
   <template>
     {{! template-lint-disable no-invalid-interactive }}
     {{bodyClass "discover-home"}}
@@ -70,7 +105,12 @@ export default class HomeList extends Component {
               </div>
               {{#if topic.discover_entry_logo_url}}
                 <div class="discover-list__item-logo">
-                  <img src={{topic.discover_entry_logo_url}} />
+                  <img
+                    src={{topic.discover_entry_logo_url}}
+                    alt="topic logo"
+                    crossOrigin="Anonymous"
+                    {{on "load" this.checkImageBackgroundColor}}
+                  />
                 </div>
               {{/if}}
               <h2>
