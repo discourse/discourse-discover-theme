@@ -70,7 +70,7 @@ export default class HomeList extends Component {
               </div>
               {{#if topic.discover_entry_logo_url}}
                 <div class="discover-list__item-logo">
-                  <img src={{topic.discover_entry_logo_url}}/>
+                  <img src={{topic.discover_entry_logo_url}} />
                 </div>
               {{/if}}
               <h2>
