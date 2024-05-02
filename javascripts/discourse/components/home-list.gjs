@@ -68,14 +68,12 @@ export default class HomeList extends Component {
                   <div class="no-image">{{dIcon "fab-discourse"}}</div>
                 {{/unless}}
               </div>
+              {{#if topic.discover_entry_logo_url}}
+                <div class="discover-list__item-logo">
+                  <img src={{topic.discover_entry_logo_url}} />
+                </div>
+              {{/if}}
               <h2>
-                {{#if topic.image_url}}
-                  {{! todo — replace image with logo}}
-                  <img
-                    class="discover-list__item-logo"
-                    src={{topic.image_url}}
-                  />
-                {{/if}}
                 <span>{{topic.title}}</span>
               </h2>
               <div class="discover-list__item-meta">
