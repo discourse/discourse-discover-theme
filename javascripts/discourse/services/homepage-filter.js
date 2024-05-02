@@ -51,8 +51,6 @@ export default class HomepageFilter extends Service {
   }
 
   parseResults(results) {
-    results.topics.sort((a, b) => b.topics_30_days - a.topics_30_days);
-
     return results.topics.map((topic) => ({
       ...topic,
       bannerImage: topic.thumbnails
@@ -74,9 +72,10 @@ export default class HomepageFilter extends Service {
       searchString += ` ${this.searchQuery}`;
     }
 
-    return `/search.json?q=${encodeURIComponent(searchString)}&page=${
-      this.currentPage
-    }`;
+    return `/search.json?q=${encodeURIComponent(
+      searchString
+    )}%20order%3Afeatured&page=${this.currentPage}`;
+    // uses "order:featured" from the discourse-discover plugin
   }
 
   @action
