@@ -205,6 +205,7 @@ export default class HomeList extends Component {
                 viewBox="0 0 36 36"
                 class="svg-rocket {{if this.rocketLaunch '--ignition'}}"
               >
+                {{! template-lint-disable no-html-comments }}
                 <!--
                 Twemoji © 2024 is licensed under CC BY 4.0.
                 To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/
