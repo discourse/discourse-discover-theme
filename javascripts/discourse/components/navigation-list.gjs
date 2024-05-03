@@ -54,7 +54,6 @@ export default class NavigationList extends Component {
           </li>
         {{/each}}
       </ul>
-
       <div class="add-your-site">
         <h3>
           {{i18n (themePrefix "footer.add_message")}}
