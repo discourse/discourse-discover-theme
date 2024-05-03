@@ -13,3 +13,4 @@ en:
   tooltip:
     users: logged in visitors over the past 30 days
     posts: posts over the past 30 days
+  to_top: "Back to top"

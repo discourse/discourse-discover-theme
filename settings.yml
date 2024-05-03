@@ -23,4 +23,4 @@ homepage_filter:
         type: string
 
 svg_icons:
-  default: "far-newspaper"
+  default: "user-astronaut"

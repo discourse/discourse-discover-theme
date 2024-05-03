@@ -16,10 +16,10 @@ export default class HomepageFilter extends Service {
   @tracked currentPage = 1;
 
   updateFilter(filter) {
-    if (this.tagFilter !== filter) {
-      this.tagFilter = filter;
-      this.resetPageAndFetch();
-    }
+    this.resetSearch();
+
+    this.tagFilter = filter;
+    this.resetPageAndFetch();
   }
 
   updateSearchQuery(query) {
@@ -27,6 +27,11 @@ export default class HomepageFilter extends Service {
       this.searchQuery = query;
       this.resetPageAndFetch();
     }
+  }
+
+  resetSearch() {
+    this.searchQuery = "";
+    this.inputText = "";
   }
 
   resetPageAndFetch() {
@@ -79,21 +84,23 @@ export default class HomepageFilter extends Service {
   }
 
   @action
-  resetSearch() {
-    this.searchQuery = "";
-    this.inputText = "";
+  resetSearchAndFetch() {
+    this.resetSearch();
     this.resetPageAndFetch();
   }
 
   @action
   getSiteList() {
+    if (this.loading) {
+      return;
+    }
+
     this.loading = true;
 
     ajax(this.currentFilter)
       .then((data) => {
         this.hasMoreResults = data.grouped_search_result.more_full_page_results;
         if (!data.topics) {
-          this.topicResults = [];
           return;
         }
 
