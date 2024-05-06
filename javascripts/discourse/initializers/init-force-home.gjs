@@ -8,7 +8,14 @@ export default apiInitializer("1.15.0", (api) => {
     const router = api.container.lookup("service:router");
     const currentUser = api.container.lookup("service:currentUser");
     const currentRouteName = router?.currentRouteName;
-    if (!currentUser && currentRouteName !== `discovery.${defaultHomepage()}`) {
+
+    const excludeRoutes = [
+      "login",
+      "email-login",
+      `discovery.${defaultHomepage()}`,
+    ];
+
+    if (!currentUser && !excludeRoutes.includes(currentRouteName)) {
       router.transitionTo("/");
     }
   });
