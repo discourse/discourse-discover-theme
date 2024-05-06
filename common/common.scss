@@ -6,9 +6,16 @@
     "Noto Color Emoji";
 }
 
-html.anon body:not(.discover-home) {
-  // hide other page content from anon users
-  display: none;
+html.anon {
+  body:not(.discover-home):not(.static-login) {
+    // hide other page content from anon users
+    display: none;
+  }
+  body[class=""] {
+    // the admin login route has no class
+    // so it's a special case
+    display: block !important;
+  }
 }
 
 @font-face {
