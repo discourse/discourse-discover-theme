@@ -37,20 +37,21 @@ export default class NavigationList extends Component {
   }
 
   <template>
-    {{! template-lint-disable no-invalid-interactive }}
     <div class="discover-navigation-list-wrapper">
       <ul class="discover-navigation-list">
         {{#each this.navItems as |item|}}
-          <li
-            data-tag-name={{item.tagName}}
-            {{on "click" (fn this.updateFilter item.tagName)}}
-            class="discover-navigation-list__item
-              {{if item.isActive '--active'}}"
-          >
-            {{#if item.icon}}
-              {{dIcon item.icon}}
-            {{/if}}
-            {{item.label}}
+          <li>
+            <button
+              data-tag-name={{item.tagName}}
+              {{on "click" (fn this.updateFilter item.tagName)}}
+              class="discover-navigation-list__item
+                {{if item.isActive '--active'}}"
+            >
+              {{#if item.icon}}
+                {{dIcon item.icon}}
+              {{/if}}
+              {{item.label}}
+            </button>
           </li>
         {{/each}}
       </ul>

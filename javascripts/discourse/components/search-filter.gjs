@@ -33,6 +33,7 @@ export default class NavigationList extends Component {
         <h1>Discover your next community</h1>
         <input
           type="text"
+          id="filter"
           placeholder={{i18n (themePrefix "search.placeholder")}}
           oninput={{this.updateSearchQuery}}
           value={{this.homepageFilter.inputText}}
