@@ -69,7 +69,7 @@ export default class HomepageFilter extends Service {
       parseInt(this.siteSettings.discourse_discover_category, 10)
     );
 
-    let searchString = `#${category.slug}`;
+    let searchString = `#${category?.slug}`;
     if (this.tagFilter) {
       searchString += ` tags:${this.tagFilter}`;
     }

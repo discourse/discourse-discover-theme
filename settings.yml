@@ -1,14 +1,6 @@
-homepage_filters:
-  type: list
-  list_type: tag
-  default: ""
-
 homepage_filter:
   type: objects
-  default:
-    - tag: ["news"]
-      icon: "far-newspaper"
-      button_text: "News"
+  default: []
   schema:
     name: "filter"
     properties:

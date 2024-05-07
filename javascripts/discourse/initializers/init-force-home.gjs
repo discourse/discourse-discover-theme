@@ -6,7 +6,7 @@ export default apiInitializer("1.15.0", (api) => {
   // so force them back home
   api.onPageChange(() => {
     const router = api.container.lookup("service:router");
-    const currentUser = api.container.lookup("service:currentUser");
+    const currentUser = api.container.lookup("service:current-user");
     const currentRouteName = router?.currentRouteName;
 
     const excludeRoutes = [

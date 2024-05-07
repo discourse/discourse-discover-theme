@@ -143,12 +143,14 @@ html.anon {
       margin-bottom: 2em;
     }
 
-    li {
+    li button {
+      border: none;
+      width: 100%;
       display: flex;
       gap: 0.5em;
       align-items: center;
       justify-content: center;
-      padding: 0.25em 1em;
+      padding: 0.5em 1em;
       background: var(--primary-50);
       border-radius: 0.25em;
       cursor: pointer;
@@ -446,6 +448,18 @@ html.anon {
       width: 100%;
       font-size: var(--font-up-2);
       height: 10vh;
+    }
+  }
+
+  .--link-button {
+    background: none;
+    border: none;
+    color: var(--tertiary);
+    .discourse-no-touch & {
+      &:focus,
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
