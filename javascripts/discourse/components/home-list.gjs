@@ -218,6 +218,7 @@ export default class HomeList extends Component {
             {{#if this.homepageFilter.searchQuery}}
               —
               <button
+                type="button"
                 class="--link-button"
                 {{on "click" this.homepageFilter.resetSearchAndFetch}}
               >

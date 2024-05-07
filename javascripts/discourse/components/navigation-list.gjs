@@ -42,6 +42,7 @@ export default class NavigationList extends Component {
         {{#each this.navItems as |item|}}
           <li>
             <button
+              type="button"
               data-tag-name={{item.tagName}}
               {{on "click" (fn this.updateFilter item.tagName)}}
               class="discover-navigation-list__item
