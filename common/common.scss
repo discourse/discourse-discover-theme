@@ -39,6 +39,7 @@ html.anon {
     .d-header {
       background: transparent;
       box-shadow: none;
+      .header-buttons,
       .d-header-icons {
         // hide default discourse nav
         display: none;
@@ -81,6 +82,9 @@ html.anon {
       font-size: 2.75em;
       margin-bottom: 0.5em;
       line-height: 1.2;
+      @include breakpoint("mobile-extra-large") {
+        font-size: 2em;
+      }
     }
 
     input {
@@ -139,7 +143,7 @@ html.anon {
     }
 
     @media screen and (max-width: 767px) {
-      font-size: var(--font-0);
+      font-size: var(--font-down-1);
       margin-bottom: 2em;
     }
 
@@ -369,6 +373,7 @@ html.anon {
 
       &-logo {
         width: 10%;
+        max-width: 2em; // don't have the resolution for larger
         grid-area: banner;
         z-index: 2;
         background: var(--secondary);
