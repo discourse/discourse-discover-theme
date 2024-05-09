@@ -12,5 +12,5 @@ en:
     add_link: Learn More
   tooltip:
     users: logged in visitors over the past 30 days
-    posts: posts over the past 30 days
+    posts: topics over the past 30 days
   to_top: "Back to top"
