@@ -7,7 +7,7 @@
 }
 
 html.anon {
-  body:not(.discover-home):not(.static-login) {
+  body:not(.discover-home):not(.static-login):not(.has-sidebar-page) {
     // hide other page content from anon users
     display: none;
   }
