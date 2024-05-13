@@ -11,6 +11,6 @@ en:
     add_message: Want to add your community?
     add_link: Learn More
   tooltip:
-    users: logged in visitors over the past 30 days
+    users: users active in the past 30 days
     posts: topics over the past 30 days
   to_top: "Back to top"
