@@ -33,13 +33,17 @@ export default class HomeList extends Component {
   };
 
   roundStat(num) {
+    let rounded;
+
     if (num < 10) {
-      return num;
+      rounded = num;
     } else if (num < 1000) {
-      return Math.ceil(num / 10) * 10;
+      rounded = Math.ceil(num / 10) * 10;
     } else {
-      return Math.ceil(num / 100) * 100;
+      rounded = Math.ceil(num / 100) * 100;
     }
+
+    return rounded.toLocaleString();
   }
 
   get multiPageEnd() {
@@ -112,7 +116,6 @@ export default class HomeList extends Component {
   }
 
   <template>
-    {{! template-lint-disable no-invalid-interactive }}
     {{bodyClass "discover-home"}}
 
     <ul class="discover-list" {{didInsert this.homepageFilter.getSiteList}}>
