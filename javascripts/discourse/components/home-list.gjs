@@ -152,12 +152,12 @@ export default class HomeList extends Component {
                 <span>{{topic.title}}</span>
               </h2>
               <div class="discover-list__item-meta">
-                {{#if topic.users_30_days}}
+                {{#if topic.active_users_30_days}}
                   <span>
                     <DTooltip @identifier="active-topics">
                       <:trigger>
                         {{dIcon "user-friends"}}
-                        {{this.roundStat topic.users_30_days}}
+                        {{this.roundStat topic.active_users_30_days}}
                       </:trigger>
                       <:content>
                         {{i18n (themePrefix "tooltip.users")}}
