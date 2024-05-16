@@ -9,7 +9,7 @@ export default class HomepageFilter extends Service {
 
   @tracked tagFilter = null;
   @tracked topicResults = [];
-  @tracked searchQuery = "";
+  @tracked searchQuery = null;
   @tracked inputText = "";
   @tracked loading = false;
   @tracked hasMoreResults = false;
@@ -30,7 +30,7 @@ export default class HomepageFilter extends Service {
   }
 
   resetSearch() {
-    this.searchQuery = "";
+    this.searchQuery = null;
     this.inputText = "";
   }
 
@@ -56,12 +56,44 @@ export default class HomepageFilter extends Service {
   }
 
   parseResults(results) {
-    return results.topics.map((topic) => ({
-      ...topic,
-      bannerImage: topic.thumbnails
-        ? this.createBannerImage(topic.thumbnails)
-        : null,
-    }));
+    let initialResultSortOption = -1;
+
+    if (!this.tagFilter && !this.searchQuery && this.currentPage === 1) {
+      // randomize initial results sort order so that homepage has some variety
+      // only for the first page of results on the homepage
+      initialResultSortOption = Math.ceil(Math.random() * 4);
+      // 1. sort by active user count
+      // 2. sort by topic count
+      // 3. sort alphabetically
+      // 4. default order
+    }
+
+    return results.topics
+      .map((topic) => ({
+        ...topic,
+        bannerImage: topic.thumbnails
+          ? this.createBannerImage(topic.thumbnails)
+          : null,
+      }))
+      .sort((a, b) => {
+        if (initialResultSortOption === 1) {
+          if (a.active_users_30_days > b.active_users_30_days) {
+            return -1;
+          }
+        }
+
+        if (initialResultSortOption === 2) {
+          if (a.topics_30_days > b.topics_30_days) {
+            return -1;
+          }
+        }
+
+        if (initialResultSortOption === 3) {
+          return a.title.localeCompare(b.title);
+        }
+
+        return 0;
+      });
   }
 
   get currentFilter() {
