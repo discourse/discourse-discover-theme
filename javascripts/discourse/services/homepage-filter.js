@@ -76,11 +76,15 @@ export default class HomepageFilter extends Service {
     if (this.searchQuery) {
       searchString += ` ${this.searchQuery}`;
     }
+    if (!this.searchQuery || !this.searchQuery.includes("order:")) {
+      // use "order:featured" from the discourse-discover plugin as default sort
+      // allows overriding order in search input
+      searchString += ` order:featured`;
+    }
 
-    return `/search.json?q=${encodeURIComponent(
-      searchString
-    )}%20order%3Afeatured&page=${this.currentPage}`;
-    // uses "order:featured" from the discourse-discover plugin
+    return `/search.json?q=${encodeURIComponent(searchString)}&page=${
+      this.currentPage
+    }`;
   }
 
   @action
