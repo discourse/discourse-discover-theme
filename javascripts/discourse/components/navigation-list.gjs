@@ -56,10 +56,10 @@ export default class NavigationList extends Component {
             </button>
           </li>
         {{/each}}
+        <li class="add-your-site">
+          <FaqButton />
+        </li>
       </ul>
-      <div class="add-your-site">
-        <FaqButton />
-      </div>
     </div>
   </template>
 }
