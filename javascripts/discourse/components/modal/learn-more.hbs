@@ -1,0 +1,30 @@
+<DModal
+  @title={{I18n (theme-prefix "faq_modal.title")}}
+  @closeModal={{@closeModal}}
+  class="learn-more-modal"
+>
+  <:body>
+    <article class="modal-content">
+      <section class="faq-item">
+        <h2>
+          {{I18n (theme-prefix "faq_modal.how.title")}}
+        </h2>
+        {{html-safe (I18n (theme-prefix "faq_modal.how.body"))}}
+      </section>
+      <section class="faq-item">
+        <h2>
+          {{I18n (theme-prefix "faq_modal.what.title")}}
+        </h2>
+        {{html-safe (I18n (theme-prefix "faq_modal.what.body"))}}
+      </section>
+      <section class="faq-item">
+        <h2>{{I18n (theme-prefix "faq_modal.category.title")}}</h2>
+        {{html-safe (I18n (theme-prefix "faq_modal.category.body"))}}
+      </section>
+      <section class="faq-item">
+        <h2>{{I18n (theme-prefix "faq_modal.contact.title")}}</h2>
+        {{html-safe (I18n (theme-prefix "faq_modal.contact.body"))}}
+      </section>
+    </article>
+  </:body>
+</DModal>

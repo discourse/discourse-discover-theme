@@ -8,9 +8,35 @@ en:
   theme_metadata:
     description: A theme for Discourse Discover.
   footer:
-    add_message: Want to add your community?
-    add_link: Learn More
+    learn_more: Add your community
   tooltip:
     users: signed-in users active in the past 30 days
     posts: topics over the past 30 days
   to_top: "Back to top"
+  faq_modal:
+    title: "Discover FAQs"
+    how:
+      title: "How do I get my community listed?"
+      body: |
+        <p>To submit your Discourse community, it must be publicly accessible and have the admin setting <code>include in discourse discover</code> enabled.</p>
+        <p>We will not approve any communities displaying content we find objectionable. This includes anything that is illegal, discriminatory, or inappropriate for a public space.</p>
+        <p>Appearing in Discourse Discover is at the discretion of the Discourse team.</p>
+    category:
+      title: "My community is in the wrong category, how do I fix it?"
+      body: |
+        <p>Discourse Discover is reviewed and categorized by the Discourse team. You can request changes by sending a message to <a href="mailto:team@discourse.org">team@discourse.org</a>.</p>
+    what:
+      title: "What data is my community sharing?"
+      body: |
+        <p>The  <code>include in discourse discover</code> site setting collects basic statistics from your community's <code>/about</code> page, as well as its:</p>
+        <ul>
+          <li>url</li>
+          <li>title</li>
+          <li>language</li>
+          <li>logo</li>
+          <li>description</li>
+        </ul>
+    contact:
+      title: "How do I contact you?"
+      body: |
+        <p>If you have a question that's not answered here, feel free to send a message to <a href="mailto:team@discourse.org">team@discourse.org</a>.</p>

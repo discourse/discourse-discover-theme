@@ -6,6 +6,7 @@ import { service } from "@ember/service";
 import dIcon from "discourse-common/helpers/d-icon";
 import i18n from "discourse-common/helpers/i18n";
 import { bind } from "discourse-common/utils/decorators";
+import FaqButton from "../components/faq-button";
 
 export default class NavigationList extends Component {
   @service store;
@@ -57,14 +58,7 @@ export default class NavigationList extends Component {
         {{/each}}
       </ul>
       <div class="add-your-site">
-        <h3>
-          {{i18n (themePrefix "footer.add_message")}}
-          <a
-            href="https://meta.discourse.org/t/introducing-discourse-discover/295223"
-          >
-            {{i18n (themePrefix "footer.add_link")}}
-          </a>
-        </h3>
+        <FaqButton />
       </div>
     </div>
   </template>

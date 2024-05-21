@@ -183,20 +183,6 @@ html.anon {
     }
   }
 
-  .add-your-site {
-    font-size: var(--font-down-2);
-    text-align: center;
-    color: var(--primary-high);
-    h3 {
-      font-weight: normal;
-      margin-top: 2em;
-    }
-
-    @media screen and (max-width: 767px) {
-      display: none;
-    }
-  }
-
   .discover-list {
     --border-radius: 1em;
     grid-area: directory;
@@ -466,6 +452,46 @@ html.anon {
         text-decoration: underline;
       }
     }
+  }
+}
+
+.add-your-site {
+  font-size: var(--font-down-1);
+  text-align: center;
+  color: var(--primary-high);
+  margin-top: 2em;
+
+  button {
+    padding: 0;
+    color: var(--tertiary);
+  }
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.learn-more-modal {
+  .d-modal__container {
+    --modal-max-width: 550px;
+  }
+  section:not(:last-child) {
+    margin-bottom: 1.5em;
+  }
+  h2 {
+    line-height: 1.2;
+    font-size: var(--font-up-2);
+  }
+  ul {
+    margin-top: -0.5em;
+    columns: 2;
+  }
+}
+
+.after-header-panel-outlet {
+  font-size: var(--font-down-2);
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 }
 
