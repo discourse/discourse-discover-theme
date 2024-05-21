@@ -147,53 +147,77 @@ html.anon {
       margin-bottom: 2em;
     }
 
-    li button {
-      border: none;
-      width: 100%;
-      display: flex;
-      gap: 0.5em;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5em 1em;
-      background: var(--primary-50);
-      border-radius: 0.25em;
-      cursor: pointer;
+    li {
+      button {
+        border: none;
+        width: 100%;
+        display: flex;
+        gap: 0.5em;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5em 1em;
+        background: var(--primary-50);
+        border-radius: 0.25em;
+        cursor: pointer;
 
-      .d-icon {
-        display: none; // decided against icons for now
-        font-size: var(--font-down-2);
-        color: var(--primary-high);
-      }
-      &.--active {
-        background: var(--tertiary);
-        color: var(--secondary);
         .d-icon {
-          color: currentColor;
+          display: none; // decided against icons for now
+          font-size: var(--font-down-2);
+          color: var(--primary-high);
         }
-      }
+        &.--active {
+          background: var(--tertiary);
+          color: var(--secondary);
+          .d-icon {
+            color: currentColor;
+          }
+        }
 
-      .discourse-no-touch & {
-        &:not(.--active) {
-          &:hover,
-          &:focus {
-            background: var(--primary-100);
+        .discourse-no-touch & {
+          &:not(.--active) {
+            &:hover,
+            &:focus {
+              background: var(--primary-100);
+            }
           }
         }
       }
-    }
-  }
 
-  .add-your-site {
-    font-size: var(--font-down-2);
-    text-align: center;
-    color: var(--primary-high);
-    h3 {
-      font-weight: normal;
-      margin-top: 2em;
-    }
+      &.add-your-site {
+        button {
+          padding: 0;
+          color: var(--tertiary);
+          .d-icon {
+            display: none;
+          }
+        }
 
-    @media screen and (max-width: 767px) {
-      display: none;
+        @media screen and (min-width: 768px) {
+          font-size: var(--font-down-2);
+          text-align: center;
+          margin-top: 1em;
+        }
+
+        @media screen and (max-width: 767px) {
+          font-size: var(--font-up-4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          button {
+            padding: 0.15em 0.33em;
+            height: 100%;
+            .d-button-label {
+              display: none;
+            }
+            .d-icon {
+              color: var(--tertiary);
+              margin: 0;
+              display: block;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -466,6 +490,24 @@ html.anon {
         text-decoration: underline;
       }
     }
+  }
+}
+
+.learn-more-modal {
+  .d-modal__container {
+    --modal-max-width: 550px;
+  }
+  section:not(:last-child) {
+    margin-bottom: 1.5em;
+  }
+  h2 {
+    line-height: 1.2;
+    font-size: var(--font-up-2);
+    outline: none;
+  }
+  ul {
+    margin-top: -0.5em;
+    columns: 2;
   }
 }
 

@@ -56,4 +56,22 @@ RSpec.describe "Discover Theme - Anon", system: true do
 
     expect(page.current_path).to eq("/")
   end
+
+  it "triggers FAQ modal on button click" do
+    visit("/")
+
+    find(".add-your-site button").click
+
+    expect(page).to have_css(".learn-more-modal")
+  end
+
+  it "?faq param triggers modal, closing modal removes param" do
+    visit("/?faq")
+
+    expect(page).to have_css(".learn-more-modal")
+
+    find(".learn-more-modal .modal-close").click
+
+    expect(page.current_path).to eq("/")
+  end
 end
