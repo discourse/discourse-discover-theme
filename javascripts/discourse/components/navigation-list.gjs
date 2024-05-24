@@ -3,6 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { fn } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { service } from "@ember/service";
+import { or } from "truth-helpers";
 import dIcon from "discourse-common/helpers/d-icon";
 import i18n from "discourse-common/helpers/i18n";
 import { bind } from "discourse-common/utils/decorators";
@@ -46,7 +47,10 @@ export default class NavigationList extends Component {
               type="button"
               data-tag-name={{item.tagName}}
               {{on "click" (fn this.updateFilter item.tagName)}}
-              class="discover-navigation-list__item
+              class="discover-navigation-list__item plausible-event-name=Category+Button+Click plausible-event-category={{or
+                  item.tagName
+                  'all'
+                }}
                 {{if item.isActive '--active'}}"
             >
               {{#if item.icon}}
