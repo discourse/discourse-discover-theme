@@ -30,6 +30,9 @@ export default class LearnMoreModal extends Component {
       <:body>
         <article class="modal-content">
           <section class="faq-item">
+            {{htmlSafe (i18n (themePrefix "faq_modal.intro"))}}
+          </section>
+          <section class="faq-item">
             <h2 tabindex="0">
               {{i18n (themePrefix "faq_modal.how.title")}}
             </h2>
