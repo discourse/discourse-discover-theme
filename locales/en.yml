@@ -14,6 +14,7 @@ en:
     posts: topics over the past 30 days
   to_top: "Back to top"
   faq_modal:
+    intro: "Discourse Discover is a directory of communities built using the open-source <a href='https://www.discourse.org'>Discourse</a> discussion platform. You can start your own community using our <a href='https://www.discourse.org/pricing'>official hosting</a>, or <a href='https://github.com/discourse/discourse/blob/main/docs/INSTALL-cloud.md'>install it yourself</a>!"
     title: "Discover FAQs"
     how:
       title: "How do I get my community listed?"
