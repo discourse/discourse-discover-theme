@@ -25,6 +25,7 @@ export default class HomepageFilter extends Service {
   updateSearchQuery(query) {
     if (this.searchQuery !== query) {
       this.searchQuery = query;
+      this.tagFilter = null;
       this.resetPageAndFetch();
     }
   }
@@ -75,6 +76,10 @@ export default class HomepageFilter extends Service {
     }
     if (this.searchQuery) {
       searchString += ` ${this.searchQuery}`;
+    }
+    if (!this.searchQuery && !this.tagFilter) {
+      // show English-only entries in default list
+      searchString += ` #locale-en`;
     }
     if (!this.searchQuery || !this.searchQuery.includes("order:")) {
       // use "order:featured" from the discourse-discover plugin as default sort
