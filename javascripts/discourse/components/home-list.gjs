@@ -63,6 +63,10 @@ export default class HomeList extends Component {
   checkImageBackgroundColor(event) {
     const imageElement = event.target;
 
+    if (imageElement.naturalWidth === 0 || imageElement.naturalHeight === 0) {
+      return;
+    }
+
     const canvas = document.createElement("canvas");
     canvas.width = imageElement.naturalWidth;
     canvas.height = imageElement.naturalHeight;
@@ -115,6 +119,15 @@ export default class HomeList extends Component {
     );
   }
 
+  @action
+  hideImageOnError(event) {
+    const imageElement = event.target;
+    const parentContainer = imageElement.closest(".discover-list__item-logo");
+    if (parentContainer) {
+      parentContainer.style.display = "none";
+    }
+  }
+
   <template>
     {{bodyClass "discover-home"}}
 
@@ -142,9 +155,10 @@ export default class HomeList extends Component {
                 <div class="discover-list__item-logo">
                   <img
                     src={{topic.discover_entry_logo_url}}
-                    alt="topic logo"
+                    alt=""
                     crossOrigin="Anonymous"
                     {{on "load" this.checkImageBackgroundColor}}
+                    {{on "error" this.hideImageOnError}}
                   />
                 </div>
               {{/if}}

@@ -301,7 +301,6 @@ html.anon {
           &:focus {
             --border-color: var(--primary-300);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transform: translate3d(0, -0.15em, 0);
           }
         }
       }
@@ -410,8 +409,11 @@ html.anon {
         display: flex;
         align-items: center;
         justify-content: center;
+        aspect-ratio: 1 / 1;
 
         img {
+          min-height: 1.625em;
+          min-width: 1.625em;
           border-radius: 5px;
           width: 95%;
           height: 95%;
