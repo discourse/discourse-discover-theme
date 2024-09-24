@@ -499,13 +499,13 @@ html.anon {
 .locale-switcher {
   width: 100%;
   &.select-kit.combo-box .select-kit-header {
-    border-radius: .25em;
-    padding-block: .33em;
+    border-radius: 0.25em;
+    padding-block: 0.33em;
   }
   .select-kit-header-wrapper {
     .svg-icon:not(.caret-icon) {
       color: var(--primary-medium);
-      margin-right: .25em;
+      margin-right: 0.25em;
       font-size: var(--font-down-2);
     }
   }
