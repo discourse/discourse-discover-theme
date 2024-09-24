@@ -8,6 +8,9 @@ import dIcon from "discourse-common/helpers/d-icon";
 import i18n from "discourse-common/helpers/i18n";
 import { bind } from "discourse-common/utils/decorators";
 import FaqButton from "../components/faq-button";
+import ComboBox from "select-kit/components/combo-box";
+import { action } from "@ember/object";
+import { hash } from "@ember/helper";
 
 export default class NavigationList extends Component {
   @service store;
@@ -19,6 +22,13 @@ export default class NavigationList extends Component {
   @bind
   updateFilter(tagName) {
     this.homepageFilter.updateFilter(tagName);
+  }
+
+  @action
+  updateLocale(locale) {
+    this.homepageFilter.locale = locale;
+    localStorage.setItem("DiscoverLocale", locale);
+    this.homepageFilter.resetPageAndFetch();
   }
 
   get navItems() {
@@ -36,6 +46,15 @@ export default class NavigationList extends Component {
     }));
 
     return [allItem, ...tagItems];
+  }
+
+  get localeList() {
+    const locales = settings.locale_filter.map(locale => ({
+      tagName: locale.tag[0],
+      label: locale.text,
+    }));
+
+    return locales;
   }
 
   <template>
@@ -60,6 +79,16 @@ export default class NavigationList extends Component {
             </button>
           </li>
         {{/each}}
+        <li class="locale-switcher__list-item">
+          <ComboBox
+            class="locale-switcher discover-navigation-list__item"
+            @valueProperty="tagName"
+            @content={{this.localeList}}
+            @value={{this.homepageFilter.locale}}
+            @onChange={{this.updateLocale}}
+            @options={{hash icon="globe"}}
+          />
+        </li>
         <li class="add-your-site">
           <FaqButton />
         </li>

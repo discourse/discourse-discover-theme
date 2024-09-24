@@ -14,6 +14,7 @@ export default class HomepageFilter extends Service {
   @tracked loading = false;
   @tracked hasMoreResults = false;
   @tracked currentPage = 1;
+  @tracked locale = localStorage.getItem("DiscoverLocale") || "locale-en";
 
   updateFilter(filter) {
     this.resetSearch();
@@ -77,10 +78,9 @@ export default class HomepageFilter extends Service {
     if (this.searchQuery) {
       searchString += ` ${this.searchQuery}`;
     }
-    if (!this.searchQuery && !this.tagFilter) {
-      // show English-only entries in default list
-      searchString += ` #locale-en`;
-    }
+
+    searchString += ` #${this.locale}`;
+    
     if (!this.searchQuery || !this.searchQuery.includes("order:")) {
       // use "order:featured" from the discourse-discover plugin as default sort
       // allows overriding order in search input
