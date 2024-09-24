@@ -118,6 +118,7 @@ html.anon {
     grid-area: filters;
     align-self: start;
     padding-left: 0.5em;
+    z-index: 9;
     @media screen and (min-width: 768px) {
       position: sticky;
       top: 1em;
@@ -506,6 +507,12 @@ html.anon {
       color: var(--primary-medium);
       margin-right: .25em;
       font-size: var(--font-down-2);
+    }
+  }
+
+  &__list-item {
+    .select-kit.is-expanded .select-kit-body {
+      width: 180px;
     }
   }
 }
