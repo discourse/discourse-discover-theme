@@ -14,7 +14,7 @@ homepage_filter:
       button_text:
         type: string
 
-locale_filter: 
+locale_filter:
   type: objects
   default: []
   schema:

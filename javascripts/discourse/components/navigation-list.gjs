@@ -49,7 +49,7 @@ export default class NavigationList extends Component {
   }
 
   get localeList() {
-    const locales = settings.locale_filter.map(locale => ({
+    const locales = settings.locale_filter.map((locale) => ({
       tagName: locale.tag[0],
       label: locale.text,
     }));
