@@ -517,6 +517,12 @@ html.anon {
   }
 }
 
+.discover-home:not(.locale-en) {
+  .discover-navigation-list__filter-wrapper {
+    display: none;
+  }
+}
+
 .learn-more-modal {
   .d-modal__container {
     --modal-max-width: 550px;

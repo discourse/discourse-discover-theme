@@ -5,6 +5,7 @@ import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { or } from "truth-helpers";
+import bodyClass from "discourse/helpers/body-class";
 import dIcon from "discourse-common/helpers/d-icon";
 import i18n from "discourse-common/helpers/i18n";
 import { bind } from "discourse-common/utils/decorators";
@@ -25,8 +26,10 @@ export default class NavigationList extends Component {
 
   @action
   updateLocale(locale) {
+    // when switching locale, we want to reset everything else
     this.homepageFilter.locale = locale;
-    localStorage.setItem("DiscoverLocale", locale);
+    this.homepageFilter.tagFilter = null;
+    this.homepageFilter.resetSearch();
     this.homepageFilter.resetPageAndFetch();
   }
 
@@ -57,10 +60,21 @@ export default class NavigationList extends Component {
   }
 
   <template>
+    {{bodyClass this.homepageFilter.locale}}
     <div class="discover-navigation-list-wrapper">
       <ul class="discover-navigation-list">
+        <li class="locale-switcher__list-item">
+          <ComboBox
+            class="locale-switcher discover-navigation-list__item"
+            @valueProperty="tagName"
+            @content={{this.localeList}}
+            @value={{this.homepageFilter.locale}}
+            @onChange={{this.updateLocale}}
+            @options={{hash icon="globe"}}
+          />
+        </li>
         {{#each this.navItems as |item|}}
-          <li>
+          <li class="discover-navigation-list__filter-wrapper">
             <button
               type="button"
               data-tag-name={{item.tagName}}
@@ -78,16 +92,6 @@ export default class NavigationList extends Component {
             </button>
           </li>
         {{/each}}
-        <li class="locale-switcher__list-item">
-          <ComboBox
-            class="locale-switcher discover-navigation-list__item"
-            @valueProperty="tagName"
-            @content={{this.localeList}}
-            @value={{this.homepageFilter.locale}}
-            @onChange={{this.updateLocale}}
-            @options={{hash icon="globe"}}
-          />
-        </li>
         <li class="add-your-site">
           <FaqButton />
         </li>

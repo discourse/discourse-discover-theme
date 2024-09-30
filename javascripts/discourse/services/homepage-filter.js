@@ -72,14 +72,20 @@ export default class HomepageFilter extends Service {
     );
 
     let searchString = `#${category?.slug}`;
-    if (this.tagFilter) {
-      searchString += ` tags:${this.tagFilter}`;
+
+    searchString += ` #${this.locale}`;
+
+    if (this.locale === "locale-en") {
+      // only use the additional tag filters for the English locale
+      // because there aren't enough sites to populate the others yet
+      if (this.tagFilter) {
+        searchString += ` tags:${this.tagFilter}`;
+      }
     }
+
     if (this.searchQuery) {
       searchString += ` ${this.searchQuery}`;
     }
-
-    searchString += ` #${this.locale}`;
 
     if (!this.searchQuery || !this.searchQuery.includes("order:")) {
       // use "order:featured" from the discourse-discover plugin as default sort
