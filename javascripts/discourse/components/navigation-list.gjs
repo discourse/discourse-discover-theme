@@ -70,7 +70,7 @@ export default class NavigationList extends Component {
             @content={{this.localeList}}
             @value={{this.homepageFilter.locale}}
             @onChange={{this.updateLocale}}
-            @options={{hash icon="globe"}}
+            @options={{hash icon="globe" autoFilterable=false}}
           />
         </li>
         {{#each this.navItems as |item|}}
