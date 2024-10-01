@@ -1,12 +1,15 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { fn } from "@ember/helper";
+import { fn, hash } from "@ember/helper";
 import { on } from "@ember/modifier";
+import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { or } from "truth-helpers";
+import bodyClass from "discourse/helpers/body-class";
 import dIcon from "discourse-common/helpers/d-icon";
 import i18n from "discourse-common/helpers/i18n";
 import { bind } from "discourse-common/utils/decorators";
+import ComboBox from "select-kit/components/combo-box";
 import FaqButton from "../components/faq-button";
 
 export default class NavigationList extends Component {
@@ -19,6 +22,15 @@ export default class NavigationList extends Component {
   @bind
   updateFilter(tagName) {
     this.homepageFilter.updateFilter(tagName);
+  }
+
+  @action
+  updateLocale(locale) {
+    // when switching locale, we want to reset everything else
+    this.homepageFilter.locale = locale;
+    this.homepageFilter.tagFilter = null;
+    this.homepageFilter.resetSearch();
+    this.homepageFilter.resetPageAndFetch();
   }
 
   get navItems() {
@@ -38,11 +50,31 @@ export default class NavigationList extends Component {
     return [allItem, ...tagItems];
   }
 
+  get localeList() {
+    const locales = settings.locale_filter.map((locale) => ({
+      tagName: locale.tag[0],
+      label: locale.text,
+    }));
+
+    return locales;
+  }
+
   <template>
+    {{bodyClass this.homepageFilter.locale}}
     <div class="discover-navigation-list-wrapper">
       <ul class="discover-navigation-list">
+        <li class="locale-switcher__list-item">
+          <ComboBox
+            class="locale-switcher discover-navigation-list__item"
+            @valueProperty="tagName"
+            @content={{this.localeList}}
+            @value={{this.homepageFilter.locale}}
+            @onChange={{this.updateLocale}}
+            @options={{hash icon="globe" autoFilterable=false}}
+          />
+        </li>
         {{#each this.navItems as |item|}}
-          <li>
+          <li class="discover-navigation-list__filter-wrapper">
             <button
               type="button"
               data-tag-name={{item.tagName}}

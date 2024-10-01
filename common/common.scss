@@ -118,6 +118,7 @@ html.anon {
     grid-area: filters;
     align-self: start;
     padding-left: 0.5em;
+    z-index: 9;
     @media screen and (min-width: 768px) {
       position: sticky;
       top: 1em;
@@ -492,6 +493,33 @@ html.anon {
         text-decoration: underline;
       }
     }
+  }
+}
+
+.locale-switcher {
+  width: 100%;
+  &.select-kit.combo-box .select-kit-header {
+    border-radius: 0.25em;
+    padding-block: 0.33em;
+  }
+  .select-kit-header-wrapper {
+    .svg-icon:not(.caret-icon) {
+      color: var(--primary-medium);
+      margin-right: 0.25em;
+      font-size: var(--font-down-2);
+    }
+  }
+
+  &__list-item {
+    .select-kit.is-expanded .select-kit-body {
+      width: 180px;
+    }
+  }
+}
+
+.discover-home:not(.locale-en) {
+  .discover-navigation-list__filter-wrapper {
+    display: none;
   }
 }
 

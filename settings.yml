@@ -14,5 +14,20 @@ homepage_filter:
       button_text:
         type: string
 
+locale_filter:
+  type: objects
+  default: []
+  schema:
+    name: "locale"
+    identifier: text
+    properties:
+      tag:
+        type: tags
+        required: true
+        validations:
+          min_length: 1
+      text:
+        type: string
+
 svg_icons:
   default: "user-astronaut"
