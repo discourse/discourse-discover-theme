@@ -3,6 +3,10 @@ import { action } from "@ember/object";
 import Service, { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import Category from "discourse/models/category";
+import i18n from "discourse-common/helpers/i18n";
+
+const ALL_LOCALE = i18n(themePrefix("navigation.all"));
+const DEFAULT_LOCALE = "locale-en";
 
 export default class HomepageFilter extends Service {
   @service siteSettings;
@@ -14,7 +18,7 @@ export default class HomepageFilter extends Service {
   @tracked loading = false;
   @tracked hasMoreResults = false;
   @tracked currentPage = 1;
-  @tracked locale = localStorage.getItem("DiscoverLocale") || "locale-en";
+  @tracked locale = DEFAULT_LOCALE;
 
   updateFilter(filter) {
     this.resetSearch();
@@ -27,7 +31,13 @@ export default class HomepageFilter extends Service {
     if (this.searchQuery !== query) {
       this.searchQuery = query;
       this.tagFilter = null;
+      this.locale = ALL_LOCALE;
       this.resetPageAndFetch();
+    }
+
+    if (this.searchQuery === "") {
+      // reset locale to default when clearing search
+      this.locale = DEFAULT_LOCALE;
     }
   }
 
@@ -73,9 +83,11 @@ export default class HomepageFilter extends Service {
 
     let searchString = `#${category?.slug}`;
 
-    searchString += ` #${this.locale}`;
+    if (this.locale !== ALL_LOCALE) {
+      searchString += ` #${this.locale}`;
+    }
 
-    if (this.locale === "locale-en") {
+    if (this.locale === DEFAULT_LOCALE) {
       // only use the additional tag filters for the English locale
       // because there aren't enough sites to populate the others yet
       if (this.tagFilter) {
