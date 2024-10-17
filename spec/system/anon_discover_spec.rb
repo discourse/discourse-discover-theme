@@ -1,23 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe "Discover Theme - Anon", system: true do
-  let!(:theme) do 
-    upload_theme
-  end
+  let!(:theme) { upload_theme }
 
   fab!(:tag)
 
   before do
     theme.update_setting(
       :homepage_filter,
-      [
-        {
-          tag: [tag.name],
-          icon: "times",
-          button_text: "news",
-        },
-     
-      ],
+      [{ tag: [tag.name], icon: "times", button_text: "news" }],
     )
 
     theme.save!
@@ -54,7 +45,7 @@ RSpec.describe "Discover Theme - Anon", system: true do
   it "redirects anonymous visitors back home" do
     visit("/c/1")
 
-    expect(page.current_path).to eq("/")
+    expect(page).to have_current_path("/", ignore_query: true)
   end
 
   it "triggers FAQ modal on button click" do
@@ -72,6 +63,6 @@ RSpec.describe "Discover Theme - Anon", system: true do
 
     find(".learn-more-modal .modal-close").click
 
-    expect(page.current_path).to eq("/")
+    expect(page).to have_current_path("/", ignore_query: true)
   end
 end
