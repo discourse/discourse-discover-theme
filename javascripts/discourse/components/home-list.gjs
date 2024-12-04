@@ -170,7 +170,7 @@ export default class HomeList extends Component {
                   <span>
                     <DTooltip @identifier="active-topics">
                       <:trigger>
-                        {{dIcon "user-friends"}}
+                        {{dIcon "user-group"}}
                         {{this.roundStat topic.active_users_30_days}}
                       </:trigger>
                       <:content>
@@ -203,7 +203,7 @@ export default class HomeList extends Component {
                 href="/t/{{topic.id}}"
                 target="_blank"
                 rel="noopener noreferrer"
-              >{{dIcon "cog"}}</a>
+              >{{dIcon "gear"}}</a>
             {{/if}}
           </li>
         {{/each}}
