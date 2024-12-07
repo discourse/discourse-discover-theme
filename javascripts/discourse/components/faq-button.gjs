@@ -33,7 +33,7 @@ export default class NavigationList extends Component {
       @action={{this.showLearnMoreModal}}
       @translatedLabel={{i18n (themePrefix "footer.learn_more")}}
       class="btn-transparent"
-      @icon="question-circle"
+      @icon="circle-question"
     />
   </template>
 }
