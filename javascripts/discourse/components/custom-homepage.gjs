@@ -17,8 +17,7 @@ export default class CustomHomepage extends Component {
         <NavigationList />
         <HomeList />
       </div>
+      {{hideApplicationSidebar}}
     </div>
-
-    {{hideApplicationSidebar}}
   </template>
 }
