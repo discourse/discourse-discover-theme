@@ -3,12 +3,12 @@
 RSpec.describe "Discover Theme - Anon", system: true do
   let!(:theme) { upload_theme }
 
-  fab!(:tag)
+  fab!(:tag) { Fabricate(:tag, name: "news") }
 
   before do
     theme.update_setting(
       :homepage_filter,
-      [{ tag: [tag.name], icon: "times", button_text: "news" }],
+      [{ tag: [tag.name], icon: "xmark", button_text: "news" }],
     )
 
     theme.save!
