@@ -188,6 +188,7 @@ html.anon {
         button {
           padding: 0;
           color: var(--tertiary);
+          background: transparent;
           .d-icon {
             display: none;
           }
@@ -493,6 +494,12 @@ html.anon {
         text-decoration: underline;
       }
     }
+  }
+
+  .max-results {
+    margin-bottom: 3em;
+    max-width: 70%;
+    text-align: center;
   }
 }
 

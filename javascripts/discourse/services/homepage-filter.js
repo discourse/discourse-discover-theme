@@ -17,6 +17,7 @@ export default class HomepageFilter extends Service {
   @tracked inputText = "";
   @tracked loading = false;
   @tracked hasMoreResults = false;
+  @tracked maxResults = false;
   @tracked locale = DEFAULT_LOCALE;
   @tracked currentPage = 1;
   // search endpoint in core is currently limited to 10 pages of results
@@ -52,6 +53,7 @@ export default class HomepageFilter extends Service {
     this.currentPage = 1;
     this.topicResults = [];
     this.hasMoreResults = false;
+    this.maxResults = false;
     this.getSiteList();
   }
 
@@ -126,6 +128,7 @@ export default class HomepageFilter extends Service {
 
     if (this.currentPage > this.maxPage) {
       this.hasMoreResults = false;
+      this.maxResults = true;
       return;
     }
 
