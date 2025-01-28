@@ -218,6 +218,11 @@ export default class HomeList extends Component {
         {{#unless this.homepageFilter.loading}}
           {{#if this.multiPageEnd}}
             <li class="discover-list__item --end">
+              {{#if this.homepageFilter.maxResults}}
+                <div class="max-results">
+                  {{i18n (themePrefix "too_many_results")}}
+                </div>
+              {{/if}}
               <Rocket @rocketLaunch={{this.rocketLaunch}} />
               <DButton
                 @action={{this.scrollTop}}
