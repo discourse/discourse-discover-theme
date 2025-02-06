@@ -3,7 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { debounce } from "@ember/runloop";
 import { service } from "@ember/service";
-import i18n from "discourse-common/helpers/i18n";
+import { i18n } from "discourse-i18n";
 
 const DEBOUNCE_VALUE = 300;
 

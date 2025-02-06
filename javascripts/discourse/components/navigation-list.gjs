@@ -6,9 +6,9 @@ import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { or } from "truth-helpers";
 import bodyClass from "discourse/helpers/body-class";
-import dIcon from "discourse-common/helpers/d-icon";
-import i18n from "discourse-common/helpers/i18n";
-import { bind } from "discourse-common/utils/decorators";
+import dIcon from "discourse/helpers/d-icon";
+import { bind } from "discourse/lib/decorators";
+import { i18n } from "discourse-i18n";
 import ComboBox from "select-kit/components/combo-box";
 import FaqButton from "../components/faq-button";
 

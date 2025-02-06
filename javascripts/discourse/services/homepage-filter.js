@@ -3,7 +3,7 @@ import { action } from "@ember/object";
 import Service, { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import Category from "discourse/models/category";
-import i18n from "discourse-common/helpers/i18n";
+import { i18n } from "discourse-i18n";
 
 const ALL_LOCALE = i18n(themePrefix("navigation.all"));
 const DEFAULT_LOCALE = "locale-en";
