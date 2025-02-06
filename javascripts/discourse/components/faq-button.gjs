@@ -3,7 +3,7 @@ import { action } from "@ember/object";
 import { scheduleOnce } from "@ember/runloop";
 import { service } from "@ember/service";
 import DButton from "discourse/components/d-button";
-import i18n from "discourse-common/helpers/i18n";
+import { i18n } from "discourse-i18n";
 import LearnMoreModal from "../components/modal/learn-more";
 
 export default class NavigationList extends Component {

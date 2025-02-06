@@ -9,8 +9,8 @@ import ConditionalLoadingSpinner from "discourse/components/conditional-loading-
 import DButton from "discourse/components/d-button";
 import LoadMore from "discourse/components/load-more";
 import bodyClass from "discourse/helpers/body-class";
-import dIcon from "discourse-common/helpers/d-icon";
-import i18n from "discourse-common/helpers/i18n";
+import dIcon from "discourse/helpers/d-icon";
+import { i18n } from "discourse-i18n";
 import DTooltip from "float-kit/components/d-tooltip";
 import Rocket from "../components/rocket";
 
