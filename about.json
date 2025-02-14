@@ -5,7 +5,9 @@
   "theme_version": "0.0.1",
   "assets": {
     "rubik": "assets/Rubik-VariableFont_wght.ttf",
-    "open-sans": "assets/OpenSans-VariableFont_wdth,wght.ttf"
+    "open-sans": "assets/OpenSans-VariableFont_wdth,wght.ttf",
+    "ios": "assets/ios-badge.svg",
+    "android": "assets/google-play-badge.png"
   },
   "modifiers": {
     "custom_homepage": "true",

@@ -4,6 +4,7 @@ import { action } from "@ember/object";
 import { debounce } from "@ember/runloop";
 import { service } from "@ember/service";
 import { i18n } from "discourse-i18n";
+import HubPromoDesktop from "../components/hub-promo-desktop";
 
 const DEBOUNCE_VALUE = 300;
 
@@ -38,6 +39,7 @@ export default class NavigationList extends Component {
           oninput={{this.updateSearchQuery}}
           value={{this.homepageFilter.inputText}}
         />
+        <HubPromoDesktop />
       </div>
     </div>
   </template>

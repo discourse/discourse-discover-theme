@@ -42,3 +42,6 @@ en:
       title: "How do I contact you?"
       body: |
         <p>If you have a question that's not answered here, feel free to send a message to <a href="mailto:team@discourse.org">team@discourse.org</a>.</p>
+  hub_promo:
+    general: "Get DiscourseHub on <a href='%{ios}'>iOS</a> or <a href='%{android}'>Android</a> to follow all your favorites!"
+    specific: "Install the DiscourseHub app!"

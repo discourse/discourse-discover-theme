@@ -31,3 +31,9 @@ locale_filter:
 
 svg_icons:
   default: "user-astronaut"
+
+ios_url:
+  default: "https://apps.apple.com/us/app/discourse-hub/id1173672076"
+
+android_url:
+  default: "https://play.google.com/store/apps/details?id=com.discourse&hl=en_US"

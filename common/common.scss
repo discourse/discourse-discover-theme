@@ -548,5 +548,18 @@ html.anon {
   }
 }
 
+.home-logo-wrapper-outlet {
+  display: flex;
+  width: 100%;
+  .app-store-links {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    img {
+      height: 35px;
+    }
+  }
+}
+
 @import "blobs";
 @import "rocket";
