@@ -29,5 +29,27 @@ locale_filter:
       text:
         type: string
 
+promo_tile:
+  type: objects
+  default: []
+  schema:
+    name: "promo"
+    properties:
+      enabled:
+        type: boolean
+      position:
+        type: integer
+        default: 7
+        validations:
+          minimum: 1
+      title:
+        type: string
+      description:
+        type: string
+      image_url:
+        type: string
+      link:
+        type: string
+
 svg_icons:
   default: "user-astronaut"

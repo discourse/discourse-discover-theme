@@ -1,0 +1,47 @@
+.discover-home .discover-list__item.--promo {
+  .discover-list__item-link {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    @media screen and (max-width: 768px) {
+      min-height: 25em;
+    }
+  }
+
+  h2 {
+    background: var(--secondary);
+    z-index: 2;
+    font-size: var(--font-up-2);
+    padding: 1.5rem 1.5rem 0.25rem;
+    margin: auto 0 0 0;
+  }
+
+  .discover-list__item-excerpt {
+    background: var(--secondary);
+    z-index: 2;
+    margin: 0;
+    padding: 0.25rem 1.5rem 1.5rem;
+  }
+
+  .no-image,
+  .discover-list__item-meta {
+    display: none;
+  }
+
+  .discover-list__item-banner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    border: 0;
+    z-index: 1;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
