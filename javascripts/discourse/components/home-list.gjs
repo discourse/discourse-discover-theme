@@ -80,14 +80,22 @@ export default class HomeList extends Component {
       return topics;
     }
 
+    const isDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    const promoImage = isDarkMode
+      ? this.promoConfig.dark_image_url
+      : this.promoConfig.image_url;
+
     const promoItem = {
       isPromo: true,
       featured_link: this.promoConfig.link || this.appStoreLink,
       title: this.promoConfig.title,
       excerpt: this.promoConfig.description,
       bannerImage: {
-        src: this.promoConfig.image_url,
-        srcset: `${this.promoConfig.image_url} 1x`,
+        src: promoImage,
+        srcset: `${promoImage} 1x`,
         sizes: "(max-width: 600px) 100vw, 50vw",
       },
       discover_entry_logo_url: "",

@@ -39,16 +39,17 @@ promo_tile:
         type: boolean
       position:
         type: integer
-        default: 7
         validations:
           minimum: 1
       title:
         type: string
       description:
         type: string
+      link:
+        type: string
       image_url:
         type: string
-      link:
+      dark_image_url:
         type: string
 
 svg_icons:
