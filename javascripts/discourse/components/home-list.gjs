@@ -1,5 +1,5 @@
 import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
+import { cached, tracked } from "@glimmer/tracking";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
@@ -15,8 +15,8 @@ import DTooltip from "float-kit/components/d-tooltip";
 import Rocket from "../components/rocket";
 
 export default class HomeList extends Component {
-  @service store;
-  @service siteSettings;
+  @service site;
+  @service capabilities;
   @service homepageFilter;
   @service currentUser;
 
@@ -50,6 +50,70 @@ export default class HomeList extends Component {
     return (
       !this.homepageFilter.hasMoreResults && this.homepageFilter.currentPage > 1
     );
+  }
+
+  @cached
+  get promoConfig() {
+    return settings.promo_tile[0] || {};
+  }
+
+  get shouldShowPromo() {
+    return (
+      this.promoConfig.enabled &&
+      this.homepageFilter.topicResults?.length >= this.promoConfig.position
+    );
+  }
+
+  get appStoreLink() {
+    return this.capabilities.isIOS
+      ? "https://apps.apple.com/us/app/discourse-hub/id1173672076"
+      : "https://play.google.com/store/apps/details?id=com.discourse";
+  }
+
+  get promoCard() {
+    const isDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    const promoImage = isDarkMode
+      ? this.promoConfig.dark_image_url
+      : this.promoConfig.image_url;
+
+    const promoItem = {
+      isPromo: true,
+      featured_link: this.promoConfig.link || this.appStoreLink,
+      title: this.promoConfig.title,
+      excerpt: this.promoConfig.description,
+      bannerImage: {
+        src: promoImage,
+        srcset: `${promoImage} 1x`,
+        sizes: "(max-width: 600px) 100vw, 50vw",
+      },
+      discover_entry_logo_url: "",
+      active_users_30_days: 0,
+      topics_30_days: 0,
+    };
+
+    return promoItem;
+  }
+
+  get displayedTopics() {
+    const topics = this.homepageFilter.topicResults || [];
+
+    if (
+      !this.shouldShowPromo ||
+      (this.site.desktopView && !this.promoConfig.link)
+    ) {
+      return topics;
+    }
+
+    const insertAt = this.promoConfig.position - 1;
+
+    return [
+      ...topics.slice(0, insertAt),
+      this.promoCard,
+      ...topics.slice(insertAt),
+    ];
   }
 
   @action
@@ -133,8 +197,8 @@ export default class HomeList extends Component {
 
     <ul class="discover-list" {{didInsert this.homepageFilter.getSiteList}}>
       {{#if this.homepageFilter.topicResults}}
-        {{#each this.homepageFilter.topicResults as |topic|}}
-          <li class="discover-list__item">
+        {{#each this.displayedTopics as |topic|}}
+          <li class="discover-list__item {{if topic.isPromo '--promo'}}">
             <a
               href={{topic.featured_link}}
               target="_blank"
@@ -198,12 +262,14 @@ export default class HomeList extends Component {
               </p>
             </a>
             {{#if this.currentUser.admin}}
-              <a
-                class="admin-link"
-                href="/t/{{topic.id}}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >{{dIcon "gear"}}</a>
+              {{#unless topic.isPromo}}
+                <a
+                  class="admin-link"
+                  href="/t/{{topic.id}}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{{dIcon "gear"}}</a>
+              {{/unless}}
             {{/if}}
           </li>
         {{/each}}

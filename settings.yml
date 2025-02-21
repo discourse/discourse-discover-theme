@@ -29,5 +29,40 @@ locale_filter:
       text:
         type: string
 
+promo_tile:
+  type: objects
+  default:
+    [
+      {
+        "name": "promo",
+        "enabled": false,
+        "position": 5,
+        "title": "Try Discourse Hub!",
+        "description": "Find and follow your favorite communities in the official Discourse app.",
+        "link": "",
+        "image_url": "https://cdck-file-uploads-canada1.s3.dualstack.ca-central-1.amazonaws.com/discover/original/2X/d/df3bafbd73587c6ad59d0b7c6692713fb21b7c00.png",
+        "dark_image_url": "https://cdck-file-uploads-canada1.s3.dualstack.ca-central-1.amazonaws.com/discover/original/2X/0/006173523fd982e28784bd33a2ceb3bc55571c89.png",
+      },
+    ]
+  schema:
+    name: "promo"
+    properties:
+      enabled:
+        type: boolean
+      position:
+        type: integer
+        validations:
+          minimum: 1
+      title:
+        type: string
+      description:
+        type: string
+      link:
+        type: string
+      image_url:
+        type: string
+      dark_image_url:
+        type: string
+
 svg_icons:
-  default: "user-astronaut"
+  default: ""
