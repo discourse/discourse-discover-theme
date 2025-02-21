@@ -71,15 +71,7 @@ export default class HomeList extends Component {
       : "https://play.google.com/store/apps/details?id=com.discourse";
   }
 
-  get displayedTopics() {
-    const topics = this.homepageFilter.topicResults || [];
-    if (
-      !this.shouldShowPromo ||
-      (this.site.desktopView && !this.promoConfig.link)
-    ) {
-      return topics;
-    }
-
+  get promoCard() {
     const isDarkMode = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
@@ -103,8 +95,26 @@ export default class HomeList extends Component {
       topics_30_days: 0,
     };
 
+    return promoItem;
+  }
+
+  get displayedTopics() {
+    const topics = this.homepageFilter.topicResults || [];
+
+    if (
+      !this.shouldShowPromo ||
+      (this.site.desktopView && !this.promoConfig.link)
+    ) {
+      return topics;
+    }
+
     const insertAt = this.promoConfig.position - 1;
-    return [...topics.slice(0, insertAt), promoItem, ...topics.slice(insertAt)];
+
+    return [
+      ...topics.slice(0, insertAt),
+      this.promoCard,
+      ...topics.slice(insertAt),
+    ];
   }
 
   @action

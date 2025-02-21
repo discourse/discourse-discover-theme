@@ -31,7 +31,19 @@ locale_filter:
 
 promo_tile:
   type: objects
-  default: []
+  default:
+    [
+      {
+        "name": "promo",
+        "enabled": false,
+        "position": 5,
+        "title": "Try Discourse Hub!",
+        "description": "Find and follow your favorite communities in the official Discourse app.",
+        "link": "",
+        "image_url": "https://cdck-file-uploads-canada1.s3.dualstack.ca-central-1.amazonaws.com/discover/original/2X/d/df3bafbd73587c6ad59d0b7c6692713fb21b7c00.png",
+        "dark_image_url": "https://cdck-file-uploads-canada1.s3.dualstack.ca-central-1.amazonaws.com/discover/original/2X/0/006173523fd982e28784bd33a2ceb3bc55571c89.png",
+      },
+    ]
   schema:
     name: "promo"
     properties:
@@ -53,4 +65,4 @@ promo_tile:
         type: string
 
 svg_icons:
-  default: "user-astronaut"
+  default: ""
