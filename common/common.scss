@@ -6,18 +6,6 @@
     "Noto Color Emoji";
 }
 
-html.anon {
-  body:not(.discover-home):not(.static-login):not(.has-sidebar-page) {
-    // hide other page content from anon users
-    display: none;
-  }
-  body[class=""] {
-    // the admin login route has no class
-    // so it's a special case
-    display: block !important;
-  }
-}
-
 @font-face {
   font-family: "Open Sans";
   src: url($open-sans) format("truetype");
@@ -545,6 +533,21 @@ html.anon {
   ul {
     margin-top: -0.5em;
     columns: 2;
+  }
+}
+
+// Topic view overrides for anons
+
+.anon {
+  .header-buttons .auth-buttons,
+  .d-header-icons,
+  .topic-category,
+  .topic-area .topic-map,
+  .topic-area .post-menu-area,
+  .topic-area .topic-meta-data,
+  .topic-area .topic-avatar,
+  #topic-footer-buttons {
+    display: none;
   }
 }
 
