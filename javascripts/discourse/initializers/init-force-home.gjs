@@ -12,6 +12,7 @@ export default apiInitializer("1.15.0", (api) => {
     const excludeRoutes = [
       "login",
       "email-login",
+      "topic.fromParams",
       `discovery.${defaultHomepage()}`,
     ];
 
