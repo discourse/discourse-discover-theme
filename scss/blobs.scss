@@ -2,7 +2,6 @@
 // these will meander slowly across the screen
 // they show/hide at different widths to avoid text
 // and the viewport dictates the animation positioning
-
 .blob-container {
   display: block !important; // hidden inline to avoid giant unstyled SVG flash
   position: relative;
@@ -12,9 +11,11 @@
 .blobby {
   position: absolute;
   z-index: -2; // always below content
+
   @media screen and (min-width: 1800px) {
     font-size: 1.33em;
   }
+
   @media screen and (min-width: 2400px) {
     font-size: 2em;
   }
@@ -23,6 +24,7 @@
 #big-yella {
   height: 16.67em;
   left: -6.67em;
+
   @media screen and (prefers-reduced-motion: no-preference) {
     animation: blob-spinner 240s infinite linear;
   }
@@ -36,10 +38,12 @@
 
   @media screen and (prefers-reduced-motion: no-preference) {
     animation: yee-haw 500s forwards linear;
+
     @keyframes yee-haw {
       50% {
         transform: translate(20vw, 10vh) rotate(360deg);
       }
+
       100% {
         transform: translate(3vw, 5vh) rotate(720deg);
       }
@@ -58,6 +62,7 @@
 
   @media screen and (prefers-reduced-motion: no-preference) {
     animation: bounce-back 450s forwards linear;
+
     @keyframes bounce-back {
       10% {
         transform: translate(-5vw, 5vh) rotate(-120deg);
@@ -68,7 +73,7 @@
       }
 
       100% {
-        transform: translate(0vw, -3vh) rotate(-180deg);
+        transform: translate(0, -3vh) rotate(-180deg);
       }
     }
   }
@@ -86,6 +91,7 @@
 
   @media screen and (prefers-reduced-motion: no-preference) {
     animation: bounce-rock 300s forwards linear;
+
     @keyframes bounce-rock {
       30% {
         transform: translate(12vw, 2vh) rotate(40deg);
@@ -96,7 +102,7 @@
       }
 
       100% {
-        transform: translate(0vw, -2vh) rotate(360deg);
+        transform: translate(0, -2vh) rotate(360deg);
       }
     }
   }
@@ -110,8 +116,8 @@
   height: 1.87em;
   right: 6.3em;
   top: 14.3em;
-
   animation: blouncy 600s forwards linear;
+
   @keyframes blouncy {
     30% {
       transform: translate(-20vw, 10vh) rotate(-80deg);
@@ -156,6 +162,7 @@
 
   @media screen and (prefers-reduced-motion: no-preference) {
     animation: bouncy-greenie 650s forwards linear;
+
     @keyframes bouncy-greenie {
       10% {
         transform: translate(11vw, -6vh) rotate(-80deg);
@@ -166,10 +173,11 @@
       }
 
       100% {
-        transform: translate(0vw, -3vh) rotate(-180deg);
+        transform: translate(0, -3vh) rotate(-180deg);
       }
     }
   }
+
   @media screen and (max-width: 1000px) {
     display: none;
   }
@@ -182,6 +190,7 @@
 
   @media screen and (prefers-reduced-motion: no-preference) {
     animation: haw-yee 400s forwards linear;
+
     @keyframes haw-yee {
       30% {
         transform: translate(-2vw, -5vw) rotate(80deg);
@@ -206,6 +215,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
