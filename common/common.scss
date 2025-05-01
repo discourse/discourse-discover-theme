@@ -246,10 +246,6 @@
       padding-right: 0.5em;
     }
 
-    > div:not(.loading-container) {
-      display: none; // hides a div created by loadMore component
-    }
-
     &__item {
       display: grid;
       grid-template-rows: subgrid; // inherit parent rows
