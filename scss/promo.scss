@@ -4,7 +4,7 @@
     flex-direction: column;
     position: relative;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (width <= 768px) {
       min-height: 25em;
     }
   }
