@@ -273,14 +273,6 @@ export default class HomeList extends Component {
             {{/if}}
           </li>
         {{/each}}
-        <LoadMore @selector=".discover-list__item" @action={{this.loadMore}} />
-        {{#if this.homepageFilter.loading}}
-          <li class="discover-list__item --loading">
-            <ConditionalLoadingSpinner
-              @condition={{this.homepageFilter.loading}}
-            />
-          </li>
-        {{/if}}
         {{#unless this.homepageFilter.loading}}
           {{#if this.multiPageEnd}}
             <li class="discover-list__item --end">
@@ -299,6 +291,14 @@ export default class HomeList extends Component {
             </li>
           {{/if}}
         {{/unless}}
+        <LoadMore @selector=".discover-list__item" @action={{this.loadMore}} />
+        {{#if this.homepageFilter.loading}}
+          <li class="discover-list__item --loading">
+            <ConditionalLoadingSpinner
+              @condition={{this.homepageFilter.loading}}
+            />
+          </li>
+        {{/if}}
       {{else}}
         <ConditionalLoadingSpinner @condition={{this.homepageFilter.loading}}>
           <li class="no-results">
