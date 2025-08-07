@@ -4,7 +4,8 @@
 // and the viewport dictates the animation positioning
 .blob-container {
   display: block !important; // hidden inline to avoid giant unstyled SVG flash
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 0;
 }
 

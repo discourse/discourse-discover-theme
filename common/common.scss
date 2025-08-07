@@ -2,10 +2,10 @@
 
 :root {
   --heading-font-family: rubik, sans-serif;
-  --font-family:
-    "Open Sans", ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont,
-    "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family: "Open Sans", ui-sans-serif, system-ui, -apple-system,
+    blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
 }
 
 @font-face {
@@ -23,6 +23,8 @@
 }
 
 .discover-home {
+  --d-max-width: 90vw;
+
   .d-header-wrap {
     position: static;
     font-size: var(--font-up-1);
@@ -69,7 +71,8 @@
       justify-content: center;
       align-items: center;
       gap: 1em;
-      padding: 0 1rem;
+      max-width: var(--d-max-width);
+      margin: 0 auto;
     }
 
     h1 {
@@ -105,7 +108,7 @@
       gap: 1em 2em;
     }
 
-    @media screen and (width <= 767px) {
+    @media screen and (width <= 767px), screen and (width >= 1920px) {
       grid-template-areas: "filters" "directory";
       grid-template-columns: 1fr;
     }
@@ -114,16 +117,11 @@
   .discover-navigation-list-wrapper {
     grid-area: filters;
     align-self: start;
-    padding-left: 0.5em;
     z-index: 9;
 
     @media screen and (width >= 768px) {
       position: sticky;
       top: 1em;
-    }
-
-    @media screen and (width <= 767px) {
-      padding: 0 1rem;
     }
   }
 
@@ -138,8 +136,12 @@
     padding: 0;
     font-size: var(--font-up-1);
 
-    @media screen and (width >= 768px) {
+    @media screen and (width >= 768px) and (width < 1920px) {
       flex-direction: column;
+    }
+
+    @media screen and (width >= 1920px) {
+      justify-content: center;
     }
 
     @media screen and (width <= 767px) {
@@ -202,7 +204,7 @@
           margin-top: 1em;
         }
 
-        @media screen and (width <= 767px) {
+        @media screen and (width <= 767px), screen and (width >= 1920px) {
           font-size: var(--font-up-4);
           display: flex;
           align-items: center;
@@ -239,10 +241,6 @@
     margin: 0;
     width: 100%;
     padding: 0;
-
-    @media screen and (width <= 767px) {
-      padding: 0 1rem;
-    }
 
     @media screen and (width >= 768px) {
       padding-right: 0.5em;
@@ -565,6 +563,30 @@
   .topic-area .topic-avatar,
   #topic-footer-buttons {
     display: none;
+  }
+}
+
+body.--fullscreen {
+  .homepage-filter-banner,
+  .header-buttons,
+  .discover-navigation-list-wrapper,
+  .d-header > .wrap .contents > *:not(.home-logo-wrapper-outlet) {
+    display: none;
+  }
+
+  .discover-homepage__directory {
+    font-size: var(--font-down-1);
+    .discover-list__item-excerpt {
+      display: none;
+    }
+    .discover-list__item-meta {
+      margin-top: 0;
+      grid-area: unset;
+    }
+  }
+
+  .d-header > .wrap .contents {
+    justify-content: center;
   }
 }
 
