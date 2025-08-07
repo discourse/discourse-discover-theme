@@ -2,10 +2,10 @@
 
 :root {
   --heading-font-family: rubik, sans-serif;
-  --font-family:
-    "Open Sans", ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont,
-    "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family: "Open Sans", ui-sans-serif, system-ui, -apple-system,
+    blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
 }
 
 @font-face {
@@ -576,9 +576,11 @@ body.--fullscreen {
 
   .discover-homepage__directory {
     font-size: var(--font-down-1);
+
     .discover-list__item-excerpt {
       display: none;
     }
+
     .discover-list__item-meta {
       margin-top: 0;
       grid-area: unset;
