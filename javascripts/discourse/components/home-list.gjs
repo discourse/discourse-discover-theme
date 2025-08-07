@@ -19,6 +19,7 @@ export default class HomeList extends Component {
   @service capabilities;
   @service homepageFilter;
   @service currentUser;
+  @service router;
 
   @tracked rocketLaunch = false;
 
@@ -68,6 +69,10 @@ export default class HomeList extends Component {
     return this.capabilities.isIOS
       ? "https://apps.apple.com/us/app/discourse-hub/id1173672076"
       : "https://play.google.com/store/apps/details?id=com.discourse";
+  }
+
+  get isFullscreen() {
+    return this.router.currentRoute.queryParams?.fullscreen === "true";
   }
 
   get promoCard() {
@@ -194,6 +199,9 @@ export default class HomeList extends Component {
 
   <template>
     {{bodyClass "discover-home"}}
+    {{#if this.isFullscreen}}
+      {{bodyClass "--fullscreen"}}
+    {{/if}}
 
     <ul class="discover-list" {{didInsert this.homepageFilter.getSiteList}}>
       {{#if this.homepageFilter.topicResults}}
