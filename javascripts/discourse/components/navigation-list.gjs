@@ -13,8 +13,6 @@ import ComboBox from "select-kit/components/combo-box";
 import FaqButton from "../components/faq-button";
 
 export default class NavigationList extends Component {
-  @service store;
-  @service siteSettings;
   @service homepageFilter;
 
   @tracked topics;

@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { debounce } from "@ember/runloop";
 import { service } from "@ember/service";
@@ -8,8 +9,6 @@ import { i18n } from "discourse-i18n";
 const DEBOUNCE_VALUE = 300;
 
 export default class NavigationList extends Component {
-  @service store;
-  @service siteSettings;
   @service homepageFilter;
 
   @tracked topics;
@@ -32,10 +31,10 @@ export default class NavigationList extends Component {
       <div class="homepage-filter-banner__content">
         <h1>Discover your next community</h1>
         <input
+          {{on "input" this.updateSearchQuery}}
           type="text"
           id="filter"
           placeholder={{i18n (themePrefix "search.placeholder")}}
-          oninput={{this.updateSearchQuery}}
           value={{this.homepageFilter.inputText}}
         />
       </div>

@@ -1,7 +1,7 @@
 import { apiInitializer } from "discourse/lib/api";
 import { defaultHomepage } from "discourse/lib/utilities";
 
-export default apiInitializer("1.15.0", (api) => {
+export default apiInitializer((api) => {
   // anons can't do anything outside of home
   // so force them back home
   api.onPageChange(() => {
