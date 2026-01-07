@@ -66,3 +66,6 @@ promo_tile:
 
 svg_icons:
   default: ""
+
+nav_minimum_display_width:
+  default: 80em
