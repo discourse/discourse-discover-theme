@@ -1,4 +1,9 @@
 @use "lib/viewport";
+@import "variables";
+@import "blobs";
+@import "rocket";
+@import "promo";
+@import "nav";
 
 :root {
   --heading-font-family: rubik, sans-serif;
@@ -595,9 +600,3 @@ body.--fullscreen {
     justify-content: center;
   }
 }
-
-@import "blobs";
-@import "rocket";
-@import "promo";
-@import "variables";
-@import "nav";
