@@ -88,7 +88,7 @@ export default class HeaderNav extends Component {
                 class="navigation-list__link navigation-list__link--has-child"
               >
                 About
-                {{dIcon "caret-down" class="try-nav-caret"}}
+                {{dIcon "chevron-down" class="navigation-list__chevron"}}
               </a>
               <ul
                 class="navigation-list__sub-item-list js-dropdown-list
@@ -98,7 +98,7 @@ export default class HeaderNav extends Component {
               >
                 <li class="navigation-list__sub-item">
                   <a href="https://discourse.org/about">
-                    What is it
+                    What is Discourse?
                   </a>
                 </li>
                 <li class="navigation-list__sub-item">
@@ -109,11 +109,6 @@ export default class HeaderNav extends Component {
                 <li class="navigation-list__sub-item">
                   <a href="https://discourse.org/customers">
                     Customers
-                  </a>
-                </li>
-                <li class="navigation-list__sub-item">
-                  <a href="https://discourse.org/success-stories">
-                    Success Stories
                   </a>
                 </li>
                 <li class="navigation-list__sub-item">
@@ -144,7 +139,7 @@ export default class HeaderNav extends Component {
             <li class="navigation-list__item">
               <a
                 href="https://discover.discourse.com"
-                class="navigation-list__link"
+                class="navigation-list__link is-active"
               >
                 Discover
               </a>

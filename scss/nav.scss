@@ -133,13 +133,20 @@
     }
 
     &:hover::before,
-    &:focus::before {
+    &:focus::before,
+    &.is-active::before {
       opacity: 1;
       transform: translate3d(0, 0, 0);
       transition:
         opacity 25ms ease,
         transform 300ms ease 25ms;
     }
+  }
+
+  &__chevron {
+    height: 12px;
+    width: 12px;
+    vertical-align: middle;
   }
 }
 
