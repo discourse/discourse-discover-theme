@@ -5,7 +5,6 @@ import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { cancel, later } from "@ember/runloop";
 import { eq, or } from "truth-helpers";
-import dIcon from "discourse/helpers/d-icon";
 
 export default class HeaderNav extends Component {
   @tracked currentSubmenuIndex = null;
@@ -74,7 +73,6 @@ export default class HeaderNav extends Component {
                 class="navigation-list__link navigation-list__link--has-child"
               >
                 About
-                {{dIcon "chevron-down" class="navigation-list__chevron"}}
               </a>
               <ul
                 class="navigation-list__sub-item-list js-dropdown-list
@@ -129,7 +127,7 @@ export default class HeaderNav extends Component {
             <li class="navigation-list__item">
               <a
                 href="https://discover.discourse.com"
-                class="navigation-list__link is-active"
+                class="navigation-list__link --is-active"
               >
                 Discover
               </a>
@@ -155,13 +153,21 @@ export default class HeaderNav extends Component {
               </a>
             </li>
             <li class="navigation-list__item">
-              <a href="#" class="navigation-list__link">
+              <a
+                href="https://discourse.org/resource-center"
+                class="navigation-list__link"
+              >
                 Resources
               </a>
             </li>
           </ul>
         </div>
       </nav>
+      <div class="site-header-actions">
+        <div class="header-cta">
+          <a href="/pricing" class="button--primary">Get Started</a>
+        </div>
+      </div>
     {{/unless}}
   </template>
 }

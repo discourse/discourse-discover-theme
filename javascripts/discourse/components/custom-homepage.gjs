@@ -1,4 +1,5 @@
 import hideApplicationSidebar from "discourse/helpers/hide-application-sidebar";
+import HeroIconsBg from "../components/hero-icons-bg";
 import HomeList from "../components/home-list";
 import NavigationList from "../components/navigation-list";
 import SearchFilter from "../components/search-filter";
@@ -12,6 +13,8 @@ const CustomHomepage = <template>
       <HomeList />
     </div>
   </div>
+  <HeroIconsBg />
+  <div class="bg-gradient"></div>
 </template>;
 
 export default CustomHomepage;
