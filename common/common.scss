@@ -27,8 +27,6 @@
 }
 
 .discover-home {
-  --d-max-width: 90vw;
-
   .d-header-wrap {
     position: static;
     font-size: var(--font-up-1);
@@ -43,8 +41,19 @@
         display: none;
       }
 
+      .home-logo-wrapper-outlet,
+      .title {
+        overflow: visible;
+      }
+
       #site-logo {
         height: 40px;
+        position: relative;
+        top: -4px;
+      }
+
+      .wrap {
+        padding: 1rem 2rem;
       }
     }
   }
@@ -99,6 +108,13 @@
       border-radius: 0.5em;
       font-size: var(--font-up-1);
     }
+  }
+
+  .discover-homepage {
+    max-width: var(--d-max-width);
+    padding: 1rem 2rem;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .discover-homepage__directory {
