@@ -13,9 +13,11 @@ export default class HeaderNav extends Component {
   @tracked isSubmenuHovered = false;
   @tracked isTopLevelMenuItemHovered = false;
 
-  @action
-  hideSubmenu() {
-    this.scheduleSubmenuHide();
+  willDestroy() {
+    super.willDestroy(...arguments);
+    if (this.hideSubmenuTimer) {
+      this.hideSubmenuTimer = null;
+    }
   }
 
   @action
@@ -57,22 +59,6 @@ export default class HeaderNav extends Component {
     }, 300);
   }
 
-  @action
-  submenuMouseEnter() {
-    this.isSubmenuHovered = true;
-    if (this.hideSubmenuTimer) {
-      cancel(this.hideSubmenuTimer);
-    }
-  }
-
-  @action
-  submenuMouseLeave() {
-    this.isSubmenuHovered = false;
-    if (!this.isTopLevelMenuItemHovered) {
-      this.scheduleSubmenuHide();
-    }
-  }
-
   <template>
     {{#unless (or @minimized @mobileView)}}
       <nav class="navigation" aria-label="Main menu">
@@ -93,7 +79,11 @@ export default class HeaderNav extends Component {
               <ul
                 class="navigation-list__sub-item-list js-dropdown-list
                   {{if (eq this.currentSubmenuIndex 0) 'is-active'}}"
-                aria-hidden="true"
+                aria-hidden={{if
+                  (eq this.currentSubmenuIndex 0)
+                  "false"
+                  "true"
+                }}
                 aria-label="Resources submenu"
               >
                 <li class="navigation-list__sub-item">
