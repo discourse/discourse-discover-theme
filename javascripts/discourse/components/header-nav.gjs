@@ -14,7 +14,7 @@ export default class HeaderNav extends Component {
   @tracked isTopLevelMenuItemHovered = false;
 
   willDestroy() {
-super.willDestroy(...arguments);
+    super.willDestroy(...arguments);
     if (this.hideSubmenuTimer) {
       this.hideSubmenuTimer = null;
     }
