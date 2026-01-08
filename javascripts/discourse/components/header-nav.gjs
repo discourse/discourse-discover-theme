@@ -80,7 +80,11 @@ export default class HeaderNav extends Component {
               <ul
                 class="navigation-list__sub-item-list js-dropdown-list
                   {{if (eq this.currentSubmenuIndex 0) 'is-active'}}"
-                aria-hidden={{if (eq this.currentSubmenuIndex 0) "false" "true"}}
+                aria-hidden={{if
+                  (eq this.currentSubmenuIndex 0)
+                  "false"
+                  "true"
+                }}
                 aria-label="Resources submenu"
               >
                 <li class="navigation-list__sub-item">
