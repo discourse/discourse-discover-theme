@@ -87,8 +87,9 @@
       padding: var(--space-sm) var(--space-md);
     }
 
+    &:visited &:hover,
     &:hover {
-      color: var(--color-purple-500, var(--tertiary));
+      color: var(--tertiary);
     }
 
     &:visited {

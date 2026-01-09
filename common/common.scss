@@ -107,7 +107,7 @@ body {
 
   .homepage-filter-banner {
     grid-area: search;
-    padding: 4em 0 5em;
+    padding: 4em 0 3em;
     margin-bottom: 2em;
     position: relative;
     z-index: 1;
@@ -208,7 +208,7 @@ body {
       gap: 1em 2em;
     }
 
-    @media screen and (width <= 767px), screen and (width >= 1920px) {
+    @media screen and (width <= 767px) {
       grid-template-areas: "filters" "directory";
       grid-template-columns: 1fr;
     }
@@ -229,7 +229,7 @@ body {
     grid-area: filters;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25em;
+    gap: 0.5em 0.25em;
     align-self: start;
     list-style-type: none;
     margin: 0;
@@ -238,10 +238,6 @@ body {
 
     @media screen and (width >= 768px) and (width < 1920px) {
       flex-direction: column;
-    }
-
-    @media screen and (width >= 1920px) {
-      justify-content: center;
     }
 
     @media screen and (width <= 767px) {
@@ -636,7 +632,12 @@ body {
   }
 
   &__list-item {
-    margin-bottom: 1em;
+    margin-right: 1em;
+
+    @include respond-above-md {
+      margin-bottom: 1em;
+      margin-right: 0;
+    }
 
     .select-kit.is-expanded .select-kit-body {
       width: 180px;
