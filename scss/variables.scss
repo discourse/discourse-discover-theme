@@ -11,19 +11,10 @@
 
   /* Spacing */
   --base-space-unit: 1rem;
-  --space-smallest: calc(var(--base-space-unit) / 8);
-  --space-small: calc(var(--base-space-unit) / 2);
   --space-base: calc(var(--base-space-unit) * 1);
-  --space-largest: calc(var(--base-space-unit) * 3);
   --space-xs: calc(var(--base-space-unit) / 4);
   --space-sm: calc(var(--base-space-unit) / 2);
   --space-md: calc(var(--base-space-unit) * 1);
-  --space-lg: calc(var(--base-space-unit) * 1.5);
-  --space-xl: calc(var(--base-space-unit) * 2);
-  --space-2xl: calc(var(--base-space-unit) * 3);
-  --space-3xl: calc(var(--base-space-unit) * 4);
-  --space-4xl: calc(var(--base-space-unit) * 5);
-  --space-5xl: calc(var(--base-space-unit) * 6);
 
   // Discourse overrides
   --primary: #333638;
