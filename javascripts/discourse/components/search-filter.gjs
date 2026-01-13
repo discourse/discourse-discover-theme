@@ -29,14 +29,16 @@ export default class NavigationList extends Component {
   <template>
     <div class="homepage-filter-banner">
       <div class="homepage-filter-banner__content">
-        <h1>Discover your next community</h1>
-        <input
-          {{on "input" this.updateSearchQuery}}
-          type="text"
-          id="filter"
-          placeholder={{i18n (themePrefix "search.placeholder")}}
-          value={{this.homepageFilter.inputText}}
-        />
+        <h1>Discover your <span class="break">next community</span></h1>
+        <div class="homepage-filter-banner__search">
+          <input
+            {{on "input" this.updateSearchQuery}}
+            type="text"
+            id="filter"
+            placeholder={{i18n (themePrefix "search.placeholder")}}
+            value={{this.homepageFilter.inputText}}
+          />
+        </div>
       </div>
     </div>
   </template>

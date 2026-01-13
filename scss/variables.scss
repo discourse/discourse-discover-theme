@@ -1,0 +1,50 @@
+:root {
+  --heading-font-family: "Kaio", sans-serif;
+  --font-family:
+    "Inter", ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont,
+    "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --d-max-width: 1400px;
+
+  /* Base Palette */
+  --color-surface: #f9f8fc;
+
+  /* Spacing */
+  --base-space-unit: 1rem;
+  --space-base: calc(var(--base-space-unit) * 1);
+  --space-xs: calc(var(--base-space-unit) / 4);
+  --space-sm: calc(var(--base-space-unit) / 2);
+  --space-md: calc(var(--base-space-unit) * 1);
+
+  // Discourse overrides
+  --primary: #333638;
+  --tertiary: #7b5fe2;
+  --tertiary-hover: #8b6df8;
+  --d-input-focused-color: var(--tertiary);
+  --d-selected: #e6deff;
+  --d-selected-hover: #e3d9ff;
+  --d-hover: #e6deff;
+}
+
+// *---------------------------*/
+// * Media Queries
+// *---------------------------*/
+// Small tablets (portrait view)
+$screen-md-min: 48em; // 768px
+
+// Large tablets and desktops
+$screen-xl-min: $nav-minimum-display-width; // 1440px
+
+// Larege devices
+@mixin respond-above-md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin respond-above-xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}

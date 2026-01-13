@@ -5,7 +5,11 @@
   "theme_version": "0.0.1",
   "assets": {
     "rubik": "assets/Rubik-VariableFont_wght.ttf",
-    "open-sans": "assets/OpenSans-VariableFont_wdth,wght.ttf"
+    "open-sans": "assets/OpenSans-VariableFont_wdth,wght.ttf",
+    "kaio-black": "assets/Kaio-Black.woff",
+    "inter": "assets/Inter-VariableFont.ttf",
+    "inter-italic": "assets/Inter-Italic-VariableFont.ttf",
+    "search-icon": "assets/search.svg"
   },
   "modifiers": {
     "custom_homepage": "true",
