@@ -165,7 +165,7 @@ export default class HeaderNav extends Component {
       </nav>
       <div class="site-header-actions">
         <div class="header-cta">
-          <a href="/pricing" class="button--primary">Get Started</a>
+          <a href="https://discourse.org/pricing" class="button--primary">Get Started</a>
         </div>
       </div>
     {{/unless}}
