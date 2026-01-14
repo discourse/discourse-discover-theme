@@ -35,7 +35,6 @@ body {
 }
 
 // Hide outlets so they don't interfere with the new header
-.before-header-panel-outlet,
 .after-header-panel-outlet {
   display: none;
 }
@@ -52,14 +51,9 @@ body {
       z-index: 10;
 
       .panel {
-        position: unset;
         display: block;
         flex: unset;
         margin-left: unset;
-        align-items: unset;
-        width: 100%;
-        max-width: 965px;
-        max-width: 942px;
       }
 
       .contents {
@@ -68,10 +62,6 @@ body {
 
       .after-header-panel-outlet {
         display: none;
-      }
-
-      .header-buttons {
-        justify-content: space-between;
       }
 
       .auth-buttons,
@@ -677,7 +667,6 @@ body {
 
 // Topic view overrides for anons
 .anon {
-  .header-buttons .auth-buttons,
   .d-header-icons,
   .topic-category,
   .topic-area .topic-map,
@@ -691,7 +680,6 @@ body {
 
 body.--fullscreen {
   .homepage-filter-banner,
-  .header-buttons,
   .discover-navigation-list-wrapper,
   .d-header > .wrap .contents > *:not(.home-logo-wrapper-outlet) {
     display: none;
