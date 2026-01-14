@@ -58,6 +58,7 @@ body {
         margin-left: unset;
         align-items: unset;
         width: 100%;
+        max-width: 965px;
         max-width: 942px;
       }
 
@@ -91,7 +92,7 @@ body {
       }
 
       .wrap {
-        padding: 1rem 2rem;
+        padding: 1rem;
       }
     }
   }
@@ -743,6 +744,9 @@ body.--fullscreen {
   &:hover {
     background-color: var(--tertiary-hover);
     border-color: var(--tertiary-hover);
+    color: #fff;
+  }
+  &:visited {
     color: #fff;
   }
 }

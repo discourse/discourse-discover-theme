@@ -28,7 +28,7 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: contain;
 
-    @include respond-above-xl {
+    @include respond-above-lg {
       visibility: visible !important;
       position: relative;
       align-items: center;
@@ -63,7 +63,7 @@
     flex-direction: column;
     position: relative;
 
-    @include respond-above-xl {
+    @include respond-above-lg {
       flex-direction: row;
       align-items: center;
     }
@@ -83,7 +83,7 @@
     cursor: pointer;
     font-size: 1rem;
 
-    @include respond-above-xl {
+    @include respond-above-lg {
       padding: var(--space-sm) var(--space-md);
     }
 
@@ -97,11 +97,7 @@
     }
 
     &--has-child {
-      padding-right: 1.25rem;
-
-      @include respond-above-xl {
-        padding-right: 1.25rem;
-      }
+      padding-right: 1.8rem;
 
       &::after {
         content: "";
@@ -113,7 +109,7 @@
         border-right: 2px solid;
         border-bottom: 2px solid;
         transform: translateY(-50%) rotate(45deg);
-        right: var(--space-xs);
+        right: .875rem;
         top: 48%;
         color: var(--primary);
         transition:
@@ -144,7 +140,7 @@
     visibility: visible;
     opacity: 1;
 
-    @include respond-above-xl {
+    @include respond-above-lg {
       display: none;
     }
   }
@@ -181,7 +177,7 @@
     line-height: 1;
   }
 
-  @include respond-above-xl {
+  @include respond-above-lg {
     display: none;
   }
 }
@@ -198,7 +194,7 @@
   margin-right: var(--space-sm);
 
   // Desktop menu background
-  @include respond-above-xl {
+  @include respond-above-lg {
     position: absolute;
     top: 2.5rem;
     left: -0.5rem;
@@ -224,7 +220,7 @@
   &.is-active {
     display: block;
 
-    @include respond-above-xl {
+    @include respond-above-lg {
       opacity: 1;
       transform: translateY(0);
     }
