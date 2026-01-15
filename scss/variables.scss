@@ -32,12 +32,22 @@
 // Small tablets (portrait view)
 $screen-md-min: 48em; // 768px
 
+// Tablets and small desktops
+$screen-lg-min: 62em; // 992px
+
 // Large tablets and desktops
 $screen-xl-min: $nav-minimum-display-width; // 1440px
 
 // Larege devices
 @mixin respond-above-md {
   @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin respond-above-lg {
+  @media (min-width: #{$screen-lg-min}) {
     @content;
   }
 }
