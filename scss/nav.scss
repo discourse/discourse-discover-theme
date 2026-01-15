@@ -87,7 +87,7 @@
       padding: var(--space-sm) var(--space-md);
     }
 
-    &:visited &:hover,
+    &:visited:hover,
     &:hover {
       color: var(--tertiary);
     }
