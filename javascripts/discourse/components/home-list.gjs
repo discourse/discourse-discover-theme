@@ -122,6 +122,12 @@ export default class HomeList extends Component {
   }
 
   @action
+  initialize() {
+    this.homepageFilter.initFromUrlParams();
+    this.homepageFilter.getSiteList();
+  }
+
+  @action
   loadMore() {
     if (this.homepageFilter.hasMoreResults) {
       this.homepageFilter.getSiteList();
@@ -203,7 +209,7 @@ export default class HomeList extends Component {
       {{bodyClass "--fullscreen"}}
     {{/if}}
 
-    <ul class="discover-list" {{didInsert this.homepageFilter.getSiteList}}>
+    <ul class="discover-list" {{didInsert this.initialize}}>
       {{#if this.homepageFilter.topicResults}}
         {{#each this.displayedTopics as |topic|}}
           <li class="discover-list__item {{if topic.isPromo '--promo'}}">

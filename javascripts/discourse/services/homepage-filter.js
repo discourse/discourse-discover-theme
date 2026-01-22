@@ -179,8 +179,6 @@ export default class HomepageFilter extends Service {
 
   @action
   getSiteList() {
-    this.initFromUrlParams();
-
     if (this.loading) {
       return;
     }
