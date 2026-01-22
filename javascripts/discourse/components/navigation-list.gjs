@@ -17,9 +17,58 @@ export default class NavigationList extends Component {
 
   @tracked topics;
 
+  constructor() {
+    super(...arguments);
+    this.initializeFromUrl();
+    // Listen for browser back/forward navigation
+    this._popstateHandler = this.initializeFromUrl.bind(this);
+    window.addEventListener("popstate", this._popstateHandler);
+  }
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+    window.removeEventListener("popstate", this._popstateHandler);
+  }
+
+  @action
+  initializeFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryFromUrl = urlParams.get("category");
+    const currentFilter = this.homepageFilter.tagFilter;
+
+    // Only update if URL differs from current filter
+    if (categoryFromUrl !== currentFilter) {
+      if (categoryFromUrl) {
+        // Verify this is a valid category tag
+        const validTags = settings.homepage_filter.map((obj) => obj.tag[0]);
+
+        if (validTags.includes(categoryFromUrl)) {
+          this.homepageFilter.updateFilter(categoryFromUrl);
+        }
+      } else {
+        // URL has no category, clear filter
+        this.homepageFilter.updateFilter(null);
+      }
+    }
+  }
+
   @bind
   updateFilter(tagName) {
     this.homepageFilter.updateFilter(tagName);
+    this.updateUrl(tagName);
+  }
+
+  @action
+  updateUrl(tagName) {
+    const url = new URL(window.location.href);
+
+    if (tagName) {
+      url.searchParams.set("category", tagName);
+    } else {
+      url.searchParams.delete("category");
+    }
+
+    window.history.pushState({}, "", url.toString());
   }
 
   @action
@@ -29,6 +78,7 @@ export default class NavigationList extends Component {
     this.homepageFilter.tagFilter = null;
     this.homepageFilter.resetSearch();
     this.homepageFilter.resetPageAndFetch();
+    this.updateUrl(null);
   }
 
   get navItems() {
