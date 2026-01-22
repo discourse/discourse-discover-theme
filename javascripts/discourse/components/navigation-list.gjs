@@ -24,11 +24,7 @@ export default class NavigationList extends Component {
 
   @action
   updateLocale(locale) {
-    // when switching locale, we want to reset everything else
-    this.homepageFilter.locale = locale;
-    this.homepageFilter.tagFilter = null;
-    this.homepageFilter.resetSearch();
-    this.homepageFilter.resetPageAndFetch();
+    this.homepageFilter.updateLocale(locale);
   }
 
   get navItems() {

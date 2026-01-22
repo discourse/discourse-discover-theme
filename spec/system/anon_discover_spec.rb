@@ -65,4 +65,86 @@ RSpec.describe "Discover Theme - Anon", system: true do
 
     expect(page).to have_current_path("/", ignore_query: true)
   end
+
+  describe "URL query parameters" do
+    it "?tag param activates the corresponding filter" do
+      visit("/?tag=#{tag.name}")
+
+      expect(page).to have_css("button[data-tag-name='#{tag.name}'].--active")
+    end
+
+    it "clicking a filter updates the URL with ?tag param" do
+      visit("/")
+
+      find("button[data-tag-name='#{tag.name}']").click
+
+      expect(page).to have_current_path("/?tag=#{tag.name}")
+    end
+
+    it "clicking 'All' filter removes tag param from URL" do
+      visit("/?tag=#{tag.name}")
+
+      all(".discover-navigation-list__filter-wrapper button").first.click
+
+      expect(page).to have_current_path("/")
+    end
+
+    it "?q param fills the search input and triggers search" do
+      visit("/?q=testing")
+
+      expect(find("#filter").value).to eq("testing")
+    end
+
+    it "searching updates the URL with ?q param" do
+      visit("/")
+
+      fill_in "filter", with: "hello"
+
+      sleep 1
+
+      expect(page).to have_current_path("/?q=hello")
+    end
+
+    it "clearing search removes ?q param from URL" do
+      visit("/?q=xyznonexistent123")
+
+      expect(page).to have_css(".no-results .--link-button")
+
+      find(".no-results .--link-button").click
+
+      expect(page).to have_current_path("/")
+    end
+
+    context "with locale filter configured" do
+      fab!(:locale_en_tag) { Fabricate(:tag, name: "locale-en") }
+      fab!(:locale_fr_tag) { Fabricate(:tag, name: "locale-fr") }
+
+      before do
+        theme.update_setting(
+          :locale_filter,
+          [
+            { tag: [locale_en_tag.name], text: "English" },
+            { tag: [locale_fr_tag.name], text: "French" },
+          ],
+        )
+
+        theme.save!
+      end
+
+      it "?locale param sets the locale filter" do
+        visit("/?locale=fr")
+
+        expect(page).to have_css(".locale-switcher .select-kit-header[data-value='locale-fr']")
+      end
+
+      it "changing locale updates the URL with ?locale param" do
+        visit("/")
+
+        find(".locale-switcher").click
+        find(".select-kit-row[data-value='locale-fr']").click
+
+        expect(page).to have_current_path("/?locale=fr")
+      end
+    end
+  end
 end
