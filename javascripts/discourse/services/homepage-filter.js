@@ -22,13 +22,13 @@ export default class HomepageFilter extends Service {
   @tracked currentPage = 1;
   // search endpoint in core is currently limited to 10 pages of results
   maxPage = 10;
-  _initialized = false;
+  initialized = false;
 
   initFromUrlParams() {
-    if (this._initialized) {
+    if (this.initialized) {
       return;
     }
-    this._initialized = true;
+    this.initialized = true;
 
     const params = new URLSearchParams(window.location.search);
     const tag = params.get("tag");
