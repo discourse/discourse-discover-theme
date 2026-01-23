@@ -22,26 +22,81 @@ export default class HomepageFilter extends Service {
   @tracked currentPage = 1;
   // search endpoint in core is currently limited to 10 pages of results
   maxPage = 10;
+  initialized = false;
+
+  initFromUrlParams() {
+    if (this.initialized) {
+      return;
+    }
+    this.initialized = true;
+
+    const params = new URLSearchParams(window.location.search);
+    const tag = params.get("tag");
+    const locale = params.get("locale");
+    const query = params.get("q");
+
+    if (query) {
+      this.searchQuery = query;
+      this.inputText = query;
+      this.tagFilter = null;
+      this.locale = ALL_LOCALE;
+    } else {
+      if (locale) {
+        this.locale = `locale-${locale}`;
+      }
+      if (tag) {
+        this.tagFilter = tag;
+      }
+    }
+  }
+
+  syncUrlParams() {
+    const params = new URLSearchParams();
+
+    if (this.searchQuery) {
+      params.set("q", this.searchQuery);
+    } else {
+      if (this.tagFilter) {
+        params.set("tag", this.tagFilter);
+      }
+      if (this.locale && this.locale !== DEFAULT_LOCALE) {
+        params.set("locale", this.locale.replace("locale-", ""));
+      }
+    }
+
+    const newUrl = params.toString()
+      ? `${window.location.pathname}?${params}`
+      : window.location.pathname;
+
+    window.history.replaceState(null, "", newUrl);
+  }
 
   updateFilter(filter) {
     this.resetSearch();
-
+    this.locale = DEFAULT_LOCALE;
     this.tagFilter = filter;
+    this.syncUrlParams();
     this.resetPageAndFetch();
   }
 
   updateSearchQuery(query) {
-    if (this.searchQuery !== query) {
-      this.searchQuery = query;
-      this.tagFilter = null;
-      this.locale = ALL_LOCALE;
-      this.resetPageAndFetch();
+    if (this.searchQuery === query) {
+      return;
     }
 
-    if (this.searchQuery === "") {
-      // reset locale to default when clearing search
-      this.locale = DEFAULT_LOCALE;
-    }
+    this.searchQuery = query;
+    this.tagFilter = null;
+    this.locale = query ? ALL_LOCALE : DEFAULT_LOCALE;
+    this.syncUrlParams();
+    this.resetPageAndFetch();
+  }
+
+  updateLocale(locale) {
+    this.locale = locale;
+    this.tagFilter = null;
+    this.resetSearch();
+    this.syncUrlParams();
+    this.resetPageAndFetch();
   }
 
   resetSearch() {
@@ -117,6 +172,8 @@ export default class HomepageFilter extends Service {
   @action
   resetSearchAndFetch() {
     this.resetSearch();
+    this.locale = DEFAULT_LOCALE;
+    this.syncUrlParams();
     this.resetPageAndFetch();
   }
 
