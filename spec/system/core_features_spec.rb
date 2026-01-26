@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe "Core features", type: :system do
+RSpec.describe "Core features" do
   fab!(:active_user) { Fabricate(:active_user, password: "secure_password") }
   fab!(:topics) { Fabricate.times(3, :topic_with_op, category:) }
   fab!(:category) { Fabricate(:category, name: "General") }
