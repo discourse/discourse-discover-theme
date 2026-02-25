@@ -5,7 +5,6 @@ import { ajax } from "discourse/lib/ajax";
 import Category from "discourse/models/category";
 import { i18n } from "discourse-i18n";
 
-const ALL_LOCALE = i18n(themePrefix("navigation.all"));
 const DEFAULT_LOCALE = "locale-en";
 
 export default class HomepageFilter extends Service {
@@ -24,6 +23,10 @@ export default class HomepageFilter extends Service {
   maxPage = 10;
   initialized = false;
 
+  get allLocale() {
+    return i18n(themePrefix("navigation.all"));
+  }
+
   initFromUrlParams() {
     if (this.initialized) {
       return;
@@ -39,7 +42,7 @@ export default class HomepageFilter extends Service {
       this.searchQuery = query;
       this.inputText = query;
       this.tagFilter = null;
-      this.locale = ALL_LOCALE;
+      this.locale = this.allLocale;
     } else {
       if (locale) {
         this.locale = `locale-${locale}`;
@@ -86,7 +89,7 @@ export default class HomepageFilter extends Service {
 
     this.searchQuery = query;
     this.tagFilter = null;
-    this.locale = query ? ALL_LOCALE : DEFAULT_LOCALE;
+    this.locale = query ? this.allLocale : DEFAULT_LOCALE;
     this.syncUrlParams();
     this.resetPageAndFetch();
   }
@@ -142,7 +145,7 @@ export default class HomepageFilter extends Service {
 
     let searchString = `#${category?.slug}`;
 
-    if (this.locale !== ALL_LOCALE) {
+    if (this.locale !== this.allLocale) {
       searchString += ` #${this.locale}`;
     }
 
