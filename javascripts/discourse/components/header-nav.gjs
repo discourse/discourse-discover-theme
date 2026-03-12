@@ -4,12 +4,11 @@ import { fn } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { cancel, later } from "@ember/runloop";
-import { eq, or } from "truth-helpers";
+import { eq, or } from "discourse/truth-helpers";
 
 export default class HeaderNav extends Component {
   @tracked currentSubmenuIndex = null;
   @tracked hideSubmenuTimer = null;
-  @tracked isSubmenuHovered = false;
   @tracked isTopLevelMenuItemHovered = false;
 
   willDestroy() {
@@ -52,9 +51,7 @@ export default class HeaderNav extends Component {
   @action
   scheduleSubmenuHide() {
     this.hideSubmenuTimer = later(() => {
-      if (!this.isSubmenuHovered) {
-        this.currentSubmenuIndex = null;
-      }
+      this.currentSubmenuIndex = null;
     }, 300);
   }
 
