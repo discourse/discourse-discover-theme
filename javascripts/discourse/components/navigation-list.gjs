@@ -1,21 +1,18 @@
 import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
 import { fn, hash } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
-import { or } from "truth-helpers";
 import bodyClass from "discourse/helpers/body-class";
 import dIcon from "discourse/helpers/d-icon";
 import { bind } from "discourse/lib/decorators";
+import ComboBox from "discourse/select-kit/components/combo-box";
+import { or } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
-import ComboBox from "select-kit/components/combo-box";
 import FaqButton from "../components/faq-button";
 
 export default class NavigationList extends Component {
   @service homepageFilter;
-
-  @tracked topics;
 
   @bind
   updateFilter(tagName) {
