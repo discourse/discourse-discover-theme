@@ -12,6 +12,7 @@ export default class HomepageFilter extends Service {
   @service siteSettings;
 
   @tracked tagFilter = null;
+  @tracked orderBy = null;
   @tracked topicResults = [];
   @tracked searchQuery = "";
   @tracked inputText = "";
@@ -34,6 +35,7 @@ export default class HomepageFilter extends Service {
     const tag = params.get("tag");
     const locale = params.get("locale");
     const query = params.get("q");
+    const order = params.get("order");
 
     if (query) {
       this.searchQuery = query;
@@ -47,6 +49,9 @@ export default class HomepageFilter extends Service {
       if (tag) {
         this.tagFilter = tag;
       }
+      if (order) {
+        this.orderBy = order;
+      }
     }
   }
 
@@ -58,6 +63,9 @@ export default class HomepageFilter extends Service {
     } else {
       if (this.tagFilter) {
         params.set("tag", this.tagFilter);
+      }
+      if (this.orderBy) {
+        params.set("order", this.orderBy);
       }
       if (this.locale && this.locale !== DEFAULT_LOCALE) {
         params.set("locale", this.locale.replace("locale-", ""));
@@ -75,6 +83,16 @@ export default class HomepageFilter extends Service {
     this.resetSearch();
     this.locale = DEFAULT_LOCALE;
     this.tagFilter = filter;
+    this.orderBy = null;
+    this.syncUrlParams();
+    this.resetPageAndFetch();
+  }
+
+  updateOrder(order) {
+    this.resetSearch();
+    this.locale = DEFAULT_LOCALE;
+    this.tagFilter = null;
+    this.orderBy = order;
     this.syncUrlParams();
     this.resetPageAndFetch();
   }
@@ -86,6 +104,7 @@ export default class HomepageFilter extends Service {
 
     this.searchQuery = query;
     this.tagFilter = null;
+    this.orderBy = null;
     this.locale = query ? ALL_LOCALE : DEFAULT_LOCALE;
     this.syncUrlParams();
     this.resetPageAndFetch();
@@ -94,6 +113,7 @@ export default class HomepageFilter extends Service {
   updateLocale(locale) {
     this.locale = locale;
     this.tagFilter = null;
+    this.orderBy = null;
     this.resetSearch();
     this.syncUrlParams();
     this.resetPageAndFetch();
@@ -158,7 +178,9 @@ export default class HomepageFilter extends Service {
       searchString += ` ${this.searchQuery}`;
     }
 
-    if (!this.searchQuery || !this.searchQuery.includes("order:")) {
+    if (this.orderBy) {
+      searchString += ` order:${this.orderBy}`;
+    } else if (!this.searchQuery || !this.searchQuery.includes("order:")) {
       // use "order:featured" from the discourse-discover plugin as default sort
       // allows overriding order in search input
       searchString += ` order:featured`;
@@ -172,6 +194,7 @@ export default class HomepageFilter extends Service {
   @action
   resetSearchAndFetch() {
     this.resetSearch();
+    this.orderBy = null;
     this.locale = DEFAULT_LOCALE;
     this.syncUrlParams();
     this.resetPageAndFetch();

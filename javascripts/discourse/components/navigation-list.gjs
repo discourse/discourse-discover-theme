@@ -11,6 +11,8 @@ import { or } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
 import FaqButton from "../components/faq-button";
 
+const RECENTLY_ADDED_ORDER = "latest_topic";
+
 export default class NavigationList extends Component {
   @service homepageFilter;
 
@@ -24,11 +26,20 @@ export default class NavigationList extends Component {
     this.homepageFilter.updateLocale(locale);
   }
 
+  @action
+  onItemClick(item) {
+    if (item.orderBy) {
+      this.homepageFilter.updateOrder(item.orderBy);
+    } else {
+      this.updateFilter(item.tagName);
+    }
+  }
+
   get navItems() {
     const allItem = {
       tagName: null,
       label: i18n(themePrefix("navigation.all")),
-      isActive: !this.homepageFilter.tagFilter,
+      isActive: !this.homepageFilter.tagFilter && !this.homepageFilter.orderBy,
     };
 
     const tagItems = settings.homepage_filter.map((object) => ({
@@ -38,7 +49,14 @@ export default class NavigationList extends Component {
       isActive: object.tag[0] === this.homepageFilter.tagFilter,
     }));
 
-    return [allItem, ...tagItems];
+    const recentlyAddedItem = {
+      orderBy: RECENTLY_ADDED_ORDER,
+      label: i18n(themePrefix("navigation.recently_added")),
+      icon: "clock",
+      isActive: this.homepageFilter.orderBy === RECENTLY_ADDED_ORDER,
+    };
+
+    return [allItem, ...tagItems, recentlyAddedItem];
   }
 
   get localeList() {
@@ -69,9 +87,11 @@ export default class NavigationList extends Component {
             <button
               type="button"
               data-tag-name={{item.tagName}}
-              {{on "click" (fn this.updateFilter item.tagName)}}
+              data-order={{item.orderBy}}
+              {{on "click" (fn this.onItemClick item)}}
               class="discover-navigation-list__item plausible-event-name=Category+Button+Click plausible-event-category={{or
                   item.tagName
+                  item.orderBy
                   'all'
                 }}
                 {{if item.isActive '--active'}}"

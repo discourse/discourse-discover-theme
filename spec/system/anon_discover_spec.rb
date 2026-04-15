@@ -38,6 +38,20 @@ RSpec.describe "Discover Theme - Anon", system: true do
     expect(navigation_list).to have_active_tag_filter(tag.name)
   end
 
+  it "displays the recently added filter" do
+    discover_page.visit_home
+
+    expect(navigation_list).to have_order_filter("latest_topic")
+  end
+
+  it "clicking recently added filter adds active class" do
+    discover_page.visit_home
+
+    navigation_list.click_order_filter("latest_topic")
+
+    expect(navigation_list).to have_active_order_filter("latest_topic")
+  end
+
   it "filtering to no results shows remove filter button, which removes input value" do
     discover_page.visit_home
 
@@ -93,6 +107,28 @@ RSpec.describe "Discover Theme - Anon", system: true do
 
     it "clicking 'All' filter removes tag param from URL" do
       discover_page.visit_with_tag(tag.name)
+
+      navigation_list.click_all_filter
+
+      expect(page).to have_current_path("/")
+    end
+
+    it "?order param activates the recently added filter" do
+      discover_page.visit_with_order("latest_topic")
+
+      expect(navigation_list).to have_active_order_filter("latest_topic")
+    end
+
+    it "clicking recently added filter updates the URL with ?order param" do
+      discover_page.visit_home
+
+      navigation_list.click_order_filter("latest_topic")
+
+      expect(page).to have_current_path("/?order=latest_topic")
+    end
+
+    it "clicking 'All' filter removes order param from URL" do
+      discover_page.visit_with_order("latest_topic")
 
       navigation_list.click_all_filter
 

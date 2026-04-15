@@ -26,6 +26,11 @@ module PageObjects
         self
       end
 
+      def visit_with_order(order)
+        visit("/?order=#{order}")
+        self
+      end
+
       def visit_with_faq
         visit("/?faq")
         self
