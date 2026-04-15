@@ -22,6 +22,19 @@ module PageObjects
       def has_active_tag_filter?(tag_name)
         has_css?("button[data-tag-name='#{tag_name}'].--active")
       end
+
+      def click_order_filter(order)
+        find("button[data-order='#{order}']").click
+        self
+      end
+
+      def has_order_filter?(order)
+        has_css?("button[data-order='#{order}']")
+      end
+
+      def has_active_order_filter?(order)
+        has_css?("button[data-order='#{order}'].--active")
+      end
     end
   end
 end
